@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#box{
+			margin-top: 240px;
+			margin-left: 500px;
+			width: 100px;
+			height: 100px;
+			background: #bfbfbf;
+			cursor: move;
+		}
+		body{
+			background: #666;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script type="text/javascript">
+	let box=document.getElementById("box");
+	let disX=disY=0;
+	let startX=startY=0;
+	let flag=false;
+	box.onmousedown=function(event){
+		var event=event||window.event;
+		// 阻止事件冒泡
+		if(event && event.stopPropagation){
+			event.stopPropagation();
+		}else{
+			window.event.cancelBubble=true;
+		}
+		// 记录下mousedown点的距离
+		flag=true;
+		startX=event.clientX;
+		startY=event.clientY;
+		console.log("down");
+	}
+	box.onmousemove=function(event){
+		if(flag===false) return ;
+		let oStyle=this.currentStyle?this.currentStyle:window.getComputedStyle(this,null);
+		disX=event.clientX-startX;
+		disY=event.clientY-startY;
+		box.style.marginLeft=parseInt(oStyle.marginLeft)+disX+"px";
+		box.style.marginTop=parseInt(oStyle.marginTop)+disY+"px";
+	}	
+	document.onmouseup=function(){
+		flag=false;
+	}
+</script>
+</html>
