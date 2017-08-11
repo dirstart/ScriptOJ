@@ -39,19 +39,20 @@
 		startX=event.clientX;
 		startY=event.clientY;
 		console.log("down");
+
+		this.setCapture && this.setCapture();
 	}
-	document.onmousemove=function(event){
+	box.onmousemove=function(event){
 		if(flag===false) return ;
-		// let oStyle=this.currentStyle?this.currentStyle:window.getComputedStyle(this,null);
-		let oStyle=box.currentStyle?box.currentStyle:window.getComputedStyle(box,null);
+		let oStyle=this.currentStyle?this.currentStyle:window.getComputedStyle(this,null);
 		disX=event.clientX-startX;
 		disY=event.clientY-startY;
+		console.log(disX,disY);
 		box.style.marginLeft=parseInt(oStyle.marginLeft)+disX+"px";
 		box.style.marginTop=parseInt(oStyle.marginTop)+disY+"px";
-		startX=event.clientX;
-		startY=event.clientY;
 	}	
 	document.onmouseup=function(){
+		box.releaseCapture && box.releaseCapture();
 		flag=false;
 	}
 </script>
