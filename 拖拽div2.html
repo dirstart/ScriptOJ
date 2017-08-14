@@ -5,55 +5,92 @@
 	<title>Document</title>
 	<style type="text/css">
 		*{margin: 0;padding: 0;}
-		#box{
-			margin-top: 240px;
-			margin-left: 500px;
-			width: 100px;
-			height: 100px;
-			background: #bfbfbf;
-			cursor: move;
+		ul,li{
+			list-style: none;
 		}
-		body{
-			background: #666;
+		#box{
+			cursor: move;
+			position: absolute;
+			top: 50%;
+			left : 50%;
+			width: 300px;
+			height: 150px;
+			margin: -75px 0 0 -150px;
+			background: #C0E4DF;
+			border: 1px solid #3E2D2D;
+		}
+		html{
+			font-size: 12px;
+			background: #F0ADAD;
+		}
+		.header{
+			border-bottom: 1px solid #3E2D2D;
+			height: 40px;
+			line-height: 40px;
+			font-size: 16px;
+			text-align: center;
+			color: #8C1F1F;
 		}
 	</style>
 </head>
 <body>
-	<div id="box"></div>
+	<div id="box">
+		<p class="header">我是被拖拽的小窗口</p>
+		<p>拖拽是否开启</p><span></span>
+		<ul>
+			<li>位置X : <span id="displayX"></span></li>
+			<li>位置Y : <span id="displayY"></span></li>
+		</ul>
+	</div>
 </body>
 <script type="text/javascript">
-	let box=document.getElementById("box");
-	let disX=disY=0;
-	let startX=startY=0;
-	let flag=false;
-	box.onmousedown=function(event){
+	let oBox=document.getElementById("box"),
+		oX=document.getElementById('displayX'),
+		oY=document.getElementById('displayY'),
+		isDrag=false,
+		temX=0,
+		temY=0,
+		disX=0,
+		disY=0;
+
+	let maxX=document.documentElement.clientWidth-oBox.offsetWidth,
+		maxY=document.documentElement.clientHeight-oBox.offsetHeight;
+	
+	oBox.onmousedown=(event)=>{
 		var event=event||window.event;
-		// 阻止事件冒泡
-		if(event && event.stopPropagation){
-			event.stopPropagation();
-		}else{
-			window.event.cancelBubble=true;
-		}
-		// 记录下mousedown点的距离
-		flag=true;
-		startX=event.clientX;
-		startY=event.clientY;
-		console.log("down");
+		isDrag=true;
+		temX=event.clientX;
+		temY=event.clientY;
+		disX=temX-oBox.offsetLeft;
+		disY=temY-oBox.offsetTop;
 
 		this.setCapture && this.setCapture();
+
+		return false;
 	}
-	box.onmousemove=function(event){
-		if(flag===false) return ;
-		let oStyle=this.currentStyle?this.currentStyle:window.getComputedStyle(this,null);
-		disX=event.clientX-startX;
-		disY=event.clientY-startY;
-		console.log(disX,disY);
-		box.style.marginLeft=parseInt(oStyle.marginLeft)+disX+"px";
-		box.style.marginTop=parseInt(oStyle.marginTop)+disY+"px";
-	}	
-	document.onmouseup=function(){
-		box.releaseCapture && box.releaseCapture();
-		flag=false;
+
+	document.onmousemove=(event)=>{
+		if(!isDrag) return ;
+		var event=event||window.event;
+		temX=event.clientX-disX;
+		temY=event.clientY-disY;
+		oBox.style.marginTop = oBox.style.marginLeft = 0;
+
+		
+		console.log(temX);
+		// 做判断
+		temX=temX<0?0:temX;
+		temX=temX>maxX?maxX:temX;
+		temY=temY<0?0:temY;
+		temY=temY>maxY?maxY:temY;
+
+		oBox.style.left=temX+"px";
+		oBox.style.top=temY+"px";
+		oBox.style.marginTop = oBox.style.marginLeft = 0;
+
+	}
+	document.onmouseup=(event)=>{
+		isDrag=false;
 	}
 </script>
 </html>
