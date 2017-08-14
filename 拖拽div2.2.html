@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul,li{
+			list-style: none;
+		}
+		#box{
+			cursor: move;
+			position: absolute;
+			top: 50%;
+			left : 50%;
+			width: 300px;
+			height: 150px;
+			margin: -75px 0 0 -150px;
+			background: #C0E4DF;
+			border: 1px solid #3E2D2D;
+		}
+		html{
+			font-size: 12px;
+			background: #F0ADAD;
+		}
+		.header{
+			border-bottom: 1px solid #3E2D2D;
+			height: 40px;
+			line-height: 40px;
+			font-size: 16px;
+			text-align: center;
+			color: #8C1F1F;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<p class="header">我是被拖拽的小窗口</p>
+		<p>拖拽是否开启</p><span id="displayD"></span>
+		<ul>
+			<li>位置X : <span id="displayX"></span></li>
+			<li>位置Y : <span id="displayY"></span></li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	let oBox=document.getElementById("box"),
+		oD=document.getElementById('displayD'),
+		oX=document.getElementById('displayX'),
+		oY=document.getElementById('displayY'),
+		isDrag=false,
+		temX=0,
+		temY=0,
+		disX=0,
+		disY=0;
+
+	let maxX=document.documentElement.clientWidth-oBox.offsetWidth,
+		maxY=document.documentElement.clientHeight-oBox.offsetHeight;
+	
+	oBox.onmousedown=(event)=>{
+		var event=event||window.event;
+		isDrag=true;
+		temX=event.clientX;
+		temY=event.clientY;
+		disX=temX-oBox.offsetLeft;
+		disY=temY-oBox.offsetTop;
+
+		this.setCapture && this.setCapture();
+
+		return false;
+	}
+
+	document.onmousemove=(event)=>{
+		if(!isDrag) return ;
+		var event=event||window.event;
+		temX=event.clientX-disX;
+		temY=event.clientY-disY;
+		oBox.style.marginTop = oBox.style.marginLeft = 0;
+
+		
+		console.log(temX);
+		// 做判断
+		temX=temX<0?0:temX;
+		temX=temX>maxX?maxX:temX;
+		temY=temY<0?0:temY;
+		temY=temY>maxY?maxY:temY;
+
+		oBox.style.left=temX+"px";
+		oBox.style.top=temY+"px";
+		oBox.style.marginTop = oBox.style.marginLeft = 0;
+
+		display();
+
+	}
+	document.onmouseup=(event)=>{
+		isDrag=false;
+	}
+
+	function display(){
+		oX.innerHTML=oBox.offsetLeft;
+		oY.innerHTML=oBox.offsetTop;
+		oD.innerHTML=isDrag?'开启':'关闭';
+	}
+
+	//初始化
+	display();
+</script>
+</html>
