@@ -5,44 +5,106 @@
 	<title>Document</title>
 	<style type="text/css">
 		*{margin: 0;padding: 0;}
-		ul,li{
-			list-style: none;
+		body{
+			background: #0A7025;
+		}
+		pre{
+			padding-top: 10px;
+			border: 1px solid #F07979;
+			background: #91F5B5;
+			color: #B1298F;
 		}
 		#box{
-			cursor: move;
 			position: absolute;
-			top: 50%;
-			left : 50%;
-			width: 300px;
-			height: 150px;
-			margin: -75px 0 0 -150px;
-			background: #C0E4DF;
-			border: 1px solid #3E2D2D;
+			top: 300px;
+			left: 500px;
+			width: 100px;
+			height: 100px;
+			background: #6262E1;
+			border: 1px solid #F1EF49;
+			border-radius: 8px;
 		}
-		html{
-			font-size: 12px;
-			background: #F0ADAD;
-		}
-		.header{
-			border-bottom: 1px solid #3E2D2D;
-			height: 40px;
-			line-height: 40px;
-			font-size: 16px;
-			text-align: center;
-			color: #8C1F1F;
+		#key_display{
+			position: absolute;
+			left: 48%;
+			top: 20px;
+			font-size: 36px;
+			color: #fff;
 		}
 	</style>
 </head>
 <body>
-	<div id="box">
-		<p class="header">我是被拖拽的小窗口</p>
-		<p>拖拽是否开启</p><span></span>
-		<ul>
-			<li>位置X : <span></span></li>
-			<li>位置Y : <span></span></li>
-		</ul>
-	</div>
+	<pre>
+		本练习来自fgm.cc。
+		通过  WASD 控制方向。
+		通过  CTRL + 数字键 控制颜色。
+		通过  加减符号 控制大小。
+	</pre>
+	<div id="key_display"></div>
+	<div id="box"></div>
 </body>
 <script type="text/javascript">
+	let $=(id)=>{return typeof id==="string"?docment.getElementById(id):id;};
+	
+	// let flagLeft=flagRight=flagUp=flagDown=false;
+	let oKey=$(key_display),
+		oBox=$(box),
+		oldX=0,
+		oldY=0;
+
+	document.onkeydown=function(event){
+		var event=event||window.event;
+		event.stopPropagation();
+		isCtrl=event.ctrlKey;
+		oKey.innerHTML=event.keyCode;
+		switch(event.keyCode){
+			case 37:
+				oBox.style.left=oBox.offsetLeft-10+"px";
+				break;
+			case 38:
+				oBox.style.top=oBox.offsetTop-10+"px";
+				break;
+			case 39:
+				oBox.style.left=oBox.offsetLeft+10+"px";
+				break;
+			case 40:
+				oBox.style.top=oBox.offsetTop+10+"px";
+				break;
+			case 187:
+				oldX=oBox.offsetLeft+oBox.offsetWidth/2;
+				oldY=oBox.offsetTop+oBox.offsetHeight/2;
+				oBox.style.width=oBox.offsetWidth*1.2+"px";
+				oBox.style.height=oBox.offsetHeight*1.2+"px";
+				oBox.style.left=oldX-oBox.offsetWidth/2+"px";
+				oBox.style.top=oldY-oBox.offsetHeight/2+"px";
+				break;
+			case 189:
+				oldX=oBox.offsetLeft+oBox.offsetWidth/2;
+				oldY=oBox.offsetTop+oBox.offsetHeight/2;
+				oBox.style.width=oBox.offsetWidth/1.2+"px";
+				oBox.style.height=oBox.offsetHeight/1.2+"px";
+				oBox.style.left=oldX-oBox.offsetWidth/2+"px";
+				oBox.style.top=oldY-oBox.offsetHeight/2+"px";
+				break;
+			case 49:
+				if(event.ctrlKey) oBox.style.background="#bfbfbf";
+				else  oBox.style.background="#e7e711";
+				break;
+			case 50:
+				oBox.style.background="#f12423";
+				break;
+			case 51:
+				oBox.style.background="#6262e1";
+				break;
+			default:
+				console.log("判断结束");	
+		}
+
+		return false;
+	}
+
+
+
+
 </script>
 </html>
