@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{
+			background: #6A3545;
+		}
+		#box{
+			position: absolute;
+			left: 500px;
+			top: 300px;
+			width: 100px;
+			height: 100px;
+			border: 1px solid #fde331;
+			background: #1A5F5C;
+			cursor: move;
+		}
+		#temp{
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			background: #bfb171;
+			opacity: 0.6;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+</body>
+<script type="text/javascript">
+
+	var zIndex=1;
+	var oBox=document.getElementById('box');
+	function getStyle(ele,attr){
+		return ele.currentStyle?ele.currentStyle[attr]:getComputedStyle(ele,null)[attr];
+	}
+	
+	oBox.onmousedown=function(event){
+		var event=event||window.event;
+		var disX=event.clientX-oBox.offsetLeft;
+		var disY=event.clientY-oBox.offsetTop;
+		var maxLeft=document.documentElement.clientWidth - oBox.offsetWidth;
+		var maxTop=document.documentElement.clientHeight - oBox.offsetHeight;
+
+		var oTemp=document.createElement("div");
+		oTemp["id"]="temp";
+		oTemp.style.left=getStyle(oBox,"left");
+		oTemp.style.top=getStyle(oBox,"top");
+		oTemp.style.zIndex=zIndex++;
+		document.body.appendChild(oTemp);
+
+		document.onmousemove=function(event){
+			var event=event||window.event;
+			var temX=event.clientX-disX;
+			var temY=event.clientY-disY;
+			
+			temX=temX>maxLeft?maxLeft:temX;
+			temX=temX<0?0:temX;
+			temY=temY>maxTop?maxTop:temY;
+			temY=temY<0?0:temY;
+
+			oTemp.style.left=temX+"px";
+			oTemp.style.top=temY+"px";
+
+			return false;
+		}
+
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+			oBox.style.left=oTemp.style.left;
+			oBox.style.top=oTemp.style.top;
+			document.body.removeChild(oTemp);
+		}
+		
+		return false;
+	}
+
+</script>
+</html>
