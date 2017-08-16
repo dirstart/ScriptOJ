@@ -3,8 +3,78 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style type="text/css">
+		html,div,h1{margin: 0;padding: 0;}
+		body{
+			background: #DE9191;
+		}
+		#box{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: -50px 0 0 -50px;
+			width: 100px;
+			height: 100px;
+			background: #3A48E6;
+
+		}
+		#popover{
+			position: absolute;
+			border: 2px solid #fa1ef1;
+			color: #fff;
+			width: 200px;
+			display: none;
+			pointer-events: none;
+		}
+	</style>
 </head>
 <body>
-	
+	<div id="box"></div>
+
+	<div id="popover">
+		<h1>I'm header</h1>
+		<span>I'm message</span>
+	</div>
 </body>
+<script type="text/javascript">
+	var oBox=document.getElementById("box");
+	var oPop=document.getElementById("popover");
+	var flag=false;
+	oBox.onmouseover=function(event){
+		var event=event||window.event;
+		oPop.style.display="block";
+		// flag=true;
+		oBox.onmousemove=function(event){
+			// if(!flag) return ;
+			event.stopPropagation();
+			oPop.style.left=event.clientX+"px";
+			oPop.style.top=event.clientY+"px";
+			// return false;
+		}
+
+		return false;
+	}
+	oBox.onmouseout=function(){
+		// flag=false;
+		oPop.style.display="none";
+	}
+
+
+		// oBox.onmouseenter=function(event){
+	// 	var event=event||window.event;
+	// 	// oPop.style.display="block";
+	// 	// oPop.style.top=event.clientY+"px";
+	// 	// oPop.style.left=event.clientX+"px";
+
+	// 	oBox.onmousemove=function(event){
+	// 		var event=event||window.event;
+	// 		oPop.style.display="block";
+	// 		oPop.style.top=event.clientY+"px";
+	// 		oPop.style.left=event.clientX+"px";
+	// 	}
+	// }
+	// oBox.onmouseleave=function(){
+	// 	oPop.style.display="none";
+	// }
+</script>
 </html>
