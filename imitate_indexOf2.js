@@ -10,10 +10,7 @@ Array.prototype.indexOf=function(index){
 			break;
 		}
 	}
-
 	return res;
 }
-
 var test=['234','23424','30'];
-
 console.log(test.indexOf('30'));

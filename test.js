@@ -1,3 +1,8 @@
+var a="hello,wold";
+a.split('').splice(8,0,'r');
+console.log(a);  // hello,wold
+b=a.split('');
+b.splice(8,0,'r');
+b=b.join('');
 
-var a= Math.floor(Math.random()*1600).toString(16);
-console.log(a);
+console.log(b);
