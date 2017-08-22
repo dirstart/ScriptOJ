@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<div class="test">123</div>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	function getElementByClassName(n){
+		var classElements=[],
+			allElement=document.getElementsByTagName('*');
+		for(var i=0;i<allElement.length;i++){
+			if(allElement[i].className==n){
+				classElements[classElements.length]=allElement[i];
+			}
+		}
+		return allElement;
+	}
+
+	let oTest=getElementByClassName('test');
+	console.log(oTest);
+</script>
+</html>

@@ -3,8 +3,6 @@
 var a="hello,wold";
 // 因为a是String类型，不能直接使用Array类型的方法splice
 // a.splice(8,0,'r');     // out:  a.splice is not a function
-
-
 b=a.split('');
 b.splice(8,0,'r');
 b=b.join('');
