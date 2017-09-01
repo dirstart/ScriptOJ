@@ -1,0 +1,61 @@
+s<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="J_container">
+		<p class="test"> </p>
+		<div class="record-head">
+			<div class="head name">姓名</div>
+			<div class="head sex">性别</div>
+			<div class="head tel">电话号码</div>
+			<div class="head province">省份</div>
+			<div class="head operate">操作</div>
+		</div>
+	</div>
+	<ul id="J_List">
+		<li>
+			<div class="id">1</div>
+			<div class="name">张三</div>
+			<div class="sex">男</div>
+			<div class="tel">123</div>
+			<div class="province">浙江</div>
+			<div class="user-delete">删除</div>
+		</li>
+		<li>
+			<div class="id">2</div>
+			<div class="name">李四</div>
+			<div class="sex">女</div>
+			<div class="tel">344</div>
+			<div class="province">四川</div>
+			<div class="user-delete">删除</div>
+		</li>
+		<li>
+			<div class="id">3</div>
+			<div class="name">王二</div>
+			<div class="sex">男</div>
+			<div class="tel">804</div>
+			<div class="province">广东</div>
+			<div class="user-delete">删除</div>
+		</li>
+	</ul>
+</body>
+<script type="text/javascript">
+	function Contact(){
+		this.init();
+	}
+
+	var oList=document.getElementById("J_List");
+	var oDelete=oList.getElementsByClassName("user-delete");
+	console.log(oDelete);
+	for(let i=0;i<oDelete.length;i++){
+		oDelete[i].onclick=function(){
+			let grandParent=this.parentNode.parentNode;
+			let nowParent=this.parentNode;
+			grandParent.removeChild(nowParent);
+		}
+	}
+</script>
+</html>

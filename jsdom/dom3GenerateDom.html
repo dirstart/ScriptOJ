@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+
+
+function Contact() {
+	this.init = function() {
+		var title = [{
+			"id": 12,
+			"name": "wang"
+		}, {
+			"id": 14,
+			"name": "li"
+		}, {
+			"id": 25,
+			"name": "liu"
+		}]
+		let oUl = document.createElement("ul");
+		for (let i = 0; i < title.length; i++) {
+			let oLi = document.createElement("li");
+			let oId = document.createElement("div");
+			let oName = document.createElement("div");
+			oId.innerHTML = title[i].id;
+			oName.innerHTML = title[i].name;
+			oLi.appendChild(oId);
+			oLi.appendChild(oName);
+			oUl.appendChild(oLi);
+		}
+
+		document.body.appendChild(oUl);
+	}
+
+	this.init();
+}
+
+var x = new Contact();
+	
+</script>
+</html>

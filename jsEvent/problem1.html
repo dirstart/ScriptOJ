@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="div2">
+		<div id="div1">
+			点我
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var div1=document.getElementById('div1'),
+		div2=document.getElementById('div2');
+	div1.addEventListener('click',function(event){
+		console.log("A");
+	},true);
+
+	div2.addEventListener('click',function(event){
+		console.log("B");
+	});
+	div1.addEventListener('click',function(event){
+		console.log("C")
+	},false);
+	div2.addEventListener('click',function(event){
+		console.log("D");
+	},true);
+</script>
+</html>
