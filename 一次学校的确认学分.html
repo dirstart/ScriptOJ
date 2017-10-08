@@ -5742,7 +5742,72 @@
 
 </body>
 <script>
-        // 这里是具体的内容
+    // 这里是具体的内容
+/*
+    数据结构分析：
+        表格结构：  学年、学期、课程名称、课程性质、学分、成绩、补考、备注、重修标记
+        有用的：1.我们所需要的学分，主要计算指标
+                2.课程代码和课程名称，通过这个来选择学分的
+                3.有重修标记的就代表过了，有重修的可优先判断此处.
+
+    规则分析：
+        拿通识教育必修的  53.5 分为例子。我们现在（每个人）都能知道只有  课程代号，其他人的成绩信息我们假设互相都看不到。
+*/
+
+// 最后的结果 数据结构
+let Result={
+    TongShi:0,
+    TiYu:0
+}
+
+// 比较卡池库，数据结构
+let Pool={
+    TongShi:["毛泽东思想和中国特色社会主义理论体系概论","马克思主义基本原理","思想道德修养与法律基础","中国近现代史纲要","大学英语(基础)(I)","大学英语(基础)(II)","高等数学A(I)","高等数学A(II)","线性代数","概率统计","大学物理B(I)","大学物理B(II)","大学物理实验B(II)","大学物理实验B(I)","大学体育(基础)(I)","大学体育(基础)(II)","军事理论","形式政策","学业规划概论"]
+}
+
+// 比较函数，看是否是属于某一块的学分,另外这个函数也可以给下面那个函数使用  （包含）
+const IsContain=(key,arr)=>{
+    for(let i=0;i<arr.length;i++){
+        if(key==arr[i]){
+            return true;
+        }
+    }
+    return false;
+}
+// 比较函数，看是否及格或者补考是否过了
+const IsOk=(first,second)=>{
+    const arr_ok=["优秀","良好","中等","及格"];
+    if( IsContain(first,arr_ok) || IsContain(second,arr_ok) || parseInt(first)>=60 || parseInt(second)>=60 ){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+// 获取表内信息测试
+let oTable=document.getElementsByTagName("table")[0];
+let oTrs=oTable.getElementsByTagName("tr");
+
+// 每一行都要进行筛选，将那些补考重修的也筛选
+// !!!! 此处发现一个bug，因为第一行是没有这些属性的，所以为了我们下面代码的正常进行，要进行屏蔽操作
+for(let i=0;i<oTrs.length;i++){
+    let oTds=oTrs[i].getElementsByTagName("td");
+    let td_name=oTds[3];
+    if(td_name!=undefined){
+        let txtName=td_name.innerText;
+        if(IsContain(txtName,Pool.TongShi)){   // 如果是包含在通识里面的  =>  进行下一步判断，是否及格
+            if(IsOk(oTds[7].innerText,oTds[8].innerText)){
+                let single_value=parseFloat(oTds[6].innerText);
+                console.log(txtName,":",single_value);
+                Result.TongShi+=single_value;   
+            }
+        }
+    }
+}
+
+console.log(Result.TongShi);
+// 遭遇的问题2： parseInt只返回整数，而我们的学分有 0.5  ，所以 改用  parseFloat
+
 
         
 </script>
