@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.box{
+			width: 100px;
+			height: 100px;
+			background-color: #813f1f;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		123
+	</div>
+</body>
+<script type="text/javascript">
+	function getClass(cName,obj){
+		// if(document.getElementsByClassName){
+		// 	return document.getElementsByClassName(cName);
+		// }else 
+
+		if(obj===null){
+			console.log("kogn");
+		}
+		// console.log(typeof(obj),typeof(null));
+		// 因为没有obj，所以obj是undefined；  
+		// null是object这是我们所应该知道的
+
+		if(1==1){
+			let allEle=document.getElementsByTagName("*");
+			let res=[],candidate=[],key=[];
+			for(let i=0;i<allEle.length;i++){
+				key=allEle[i].className.split(" ");
+				for(let j=0;j<key.length;j++){
+					if(cName==key[j]){
+						res.push(allEle[i]);
+					}
+				}
+			}
+			return res;
+		}
+	}
+
+	var x=getClass("box");
+	console.log(x[0]);
+</script>
+</html>
