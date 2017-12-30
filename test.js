@@ -1,6 +1,9 @@
-let array=[1,2,3,5,7,8,11,21,33];
-function ran(){
-	return 0.5 - Math.random();
-}
-array.sort(ran());
-console.log(array);   //  [1,11,2,21,3,33,5,7,8]
+this.code += String.fromCharCode(Math.floor(Math.random() * 255));
+
+console.log(String.fromCharCode(72,69,76,76,79));
+// fromCharCode() 可以接受一个指定的Unicode值，然后返回一个字符串.
+// 返回 "HELLO"
+
+setInterval(() => {
+  console.log(String.fromCharCode(Math.random() * 255));
+}, 100);
