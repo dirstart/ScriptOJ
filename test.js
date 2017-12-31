@@ -1,9 +1,9 @@
-this.code += String.fromCharCode(Math.floor(Math.random() * 255));
+// substring,如果出现第二个参数大于第一个参数的情况，substring
+// 会自动更换两个参数的位置。
 
-console.log(String.fromCharCode(72,69,76,76,79));
-// fromCharCode() 可以接受一个指定的Unicode值，然后返回一个字符串.
-// 返回 "HELLO"
+// const a = "abc";
+// console.log(a.substr(1,2));
+// console.log(a);
 
-setInterval(() => {
-  console.log(String.fromCharCode(Math.random() * 255));
-}, 100);
+console.log(Date.parse(new Date()));
+console.log(new Date().valueOf());
