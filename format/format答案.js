@@ -13,13 +13,14 @@ const format = (value, format = "yyyy-MM-dd hh:mm:ss") => {
     let fmt = format;
     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1,
         (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
-
+// 因为date.getFullYear()返回的数字，而我们需要返回的是 String 类型
+// 通过 (`${param}`) 返回字符串（模板字符串语法）
     Object.keys(o).forEach((k) => {
-        if (new RegExp(`(${k})`).test(fmt))
-        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? 
-            (o[k]) : 
-            ((`00${o[k]}`).substr((`${o[k]}`).length)));
-    });
+            if (new RegExp(`(${k})`).test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? 
+                (o[k]) : 
+                ((`00${o[k]}`).substr((`${o[k]}`).length)));
+        });
 
     return fmt;
 };
