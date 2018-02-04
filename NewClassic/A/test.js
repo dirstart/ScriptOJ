@@ -13,18 +13,21 @@ const format = (value, format="yyyy-MM-dd hh:mm:ss") => {
         fmt = fmt.replace(RegExp.$1,
             (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
 
-        Object.keys(o).forEach((k) => console.log(k));
+        Object.keys(o).forEach((k) => {
+            if (new RegExp(`(${k})`).test(fmt)) {
+                console.log((`${o[k]}`).length, (`${o[k]}`));
+                const tem = RegExp.$1.length === 1 ?
+                    o[k]:
+                    `00${o[k]}`.substr((`${o[k]}`).length);
+                fmt = fmt.replace(RegExp.$1, tem);
+            }
+        });
+    } else {
+        console.log("没有");
     }
+    return fmt;
 }
 
-// const one = new Date();
-// format(one);
-
-const parent = Object.create(Object.prototype, {
-    a: {
-        value: 1,
-        writable: true,
-        enumerable: true,
-        configurable: true
-    }
-})
+const one = new Date();
+// console.log(format(one, "yyy:MM"));
+console.log(format(one));

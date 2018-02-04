@@ -12,11 +12,16 @@ const format = (value, format = "yyyy-MM-dd hh:mm:ss") => {
     let fmt = format;
     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1,
     (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
+        // 此句为了 当我们写 'yyy' 的时候，只返回 三位
     Object.keys(o).forEach((k) => {
         if (new RegExp(`(${k})`).test(fmt)) fmt = fmt.replace(RegExp.$1,
             (RegExp.$1.length === 1) ?
             (o[k]) :
             ((`00${o[k]}`).substr((`${o[k]}`).length)));
+        // 此句为了 当分钟数或者秒数或者..... 为 个位数的时候 显示 '01', '02', '08'之类的
     });
     return fmt;
 };
+
+const one = new Date();
+console.log(format(one));
