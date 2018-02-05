@@ -10,5 +10,4 @@ const isLeapYear = (...needles) => {
     console.log(obj + "不是闰年");
   }
 }
-
 isLeapYear(2004, 2000, 500);
