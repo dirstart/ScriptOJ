@@ -24,8 +24,8 @@
     }
     .pic-group {
       position: absolute;
-      top: -250px;
-    }
+/*      top: -250px;
+*/    }
     .pic-group li img {
       display: block;
       width: 100%;
@@ -33,7 +33,7 @@
     }
     .num-group {
       position: absolute;
-      bottom: 0;
+      bottom: 5px;
       right: 0;
       height: 20px;
     }
@@ -85,18 +85,21 @@ const oImage = document.getElementsByClassName("pic-group")[0];
 // 其次，获取改变世界的钥匙
 const oNumber = document.getElementsByClassName("num-group")[0];
 const numList = oNumber.getElementsByTagName("li");
-
 // 接下来，便是世界改变的逻辑
-for (i = 0; i < numList.length; i++) {
+for (let i = 0; i < numList.length; i++) {
   // 关键：我们要把我们的 索引index 传进 onclick/onmouseover 里面
-  // numList[i].index = i;
-  // numList[i].onclick = function () {
-  //   console.log(this.index);
-  // }
-  const index = i;
-  numList[i].onclick = (event, index) => {
+  numList[i].onclick = () => {
+    // numList[i].className = "current";
+    clearNumState();
+    numList[i].className = "current";
+    const topValue = - i * 250;
+    oImage.style.top = topValue + "px";
   }
 }
-
+const clearNumState = () => {
+  for (const item of numList) {
+    item.className = "";
+  }
+}
 </script>
 </html>
