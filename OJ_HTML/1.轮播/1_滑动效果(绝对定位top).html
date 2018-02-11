@@ -101,6 +101,8 @@ const clearNumState = () => {
 // 滑动轮播
 const show = (index) => {
   numList[index].className = "current";
+  const distance = -index * 250;
+  oImage.style.top = distance + "px";
 }
 </script>
 </html>
