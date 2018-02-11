@@ -22,7 +22,7 @@
       height: 250px;
       overflow: hidden;
     }
-    .pic-group {
+    .pic-group li {
       position: absolute;
     }
     .pic-group li img {
@@ -58,12 +58,15 @@
       color: #089a8a;
       background-color: #000;
     }
+    .pic-group li.current {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <ul class="pic-group">
-      <li><img src="./pic1.jpg" alt=""></li>
+      <li class="current"><img src="./pic1.jpg" alt=""></li>
       <li><img src="./pic2.jpg" alt=""></li>
       <li><img src="./pic3.jpg" alt=""></li>
       <li><img src="./pic4.jpg" alt=""></li>
@@ -81,25 +84,36 @@
 <script type="text/javascript">
 // 首先，获取我们要改变的元素
 const oImage = document.getElementsByClassName("pic-group")[0];
+const imageList = oImage.getElementsByTagName("li");
 // 其次，获取改变世界的钥匙
 const oNumber = document.getElementsByClassName("num-group")[0];
 const numList = oNumber.getElementsByTagName("li");
 // 接下来，便是世界改变的逻辑
 for (let i = 0; i < numList.length; i++) {
   // 关键：我们要把我们的 索引index 传进 onclick/onmouseover 里面
-  numList[i].onclick = () => {
-    // numList[i].className = "current";
+  numList[i].onmouseover = () => {
     clearNumState();
-    numList[i].className = "current";
-    const topValue = - i * 250;
-    oImage.style.top = topValue + "px";
+    show(i);
   }
 }
 // 每次新点击 num，先置空所有list的current的类，此后再添加当前索引
 const clearNumState = () => {
-  for (const item of numList) {
-    item.className = "";
+  for (let i = 0; i < numList.length; i++) {
+    numList[i].className = "";
+    imageList[i].style.opacity = "0";
   }
+}
+// 渐隐(当前点击)效果的实现
+let timer = null;
+const show = (index) => {
+  if (timer) clearInterval(timer);
+  console.log(timer);
+  let opacity = 0;
+  timer = setInterval(() => {
+    if (opacity >= 1) clearInterval(timer);
+    opacity += 0.02;
+    imageList[index].style.opacity = opacity;
+  }, 20);
 }
 </script>
 </html>
