@@ -96,6 +96,7 @@ for (let i = 0; i < numList.length; i++) {
     oImage.style.top = topValue + "px";
   }
 }
+// 每次新点击 num，先置空所有list的current的类，此后再添加当前索引
 const clearNumState = () => {
   for (const item of numList) {
     item.className = "";
