@@ -106,8 +106,8 @@ const clearNumState = () => {
 // 渐隐(当前点击)效果的实现
 let timer = null;
 const show = (index) => {
+  numList[index].className = "current";
   if (timer) clearInterval(timer);
-  console.log(timer);
   let opacity = 0;
   timer = setInterval(() => {
     if (opacity >= 1) clearInterval(timer);
