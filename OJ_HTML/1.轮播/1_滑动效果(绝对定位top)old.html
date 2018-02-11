@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  body,div,ul,li{
+    margin:0;
+    padding:0;
+    list-style: none;
+    border: 0;
+  }
+  body{
+    background: #000;
+  }
+  #box{
+    width: 502px;
+    height: 202px;
+    margin:10px auto;
+    border: 8px solid #002232;
+    position: relative;
+    overflow: hidden;
+  }
+  #box .list-image{
+    /*border: 1px solid purple;*/
+    width: 500px;
+    height: 200px;
+    position: absolute;
+  }
+  #box .list-image li{
+    border: 1px solid purple;
+    width: 500px;
+    height: 200px;
+  }
+  #box .list-number{
+    z-index: 999;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+  }
+  #box .list-number li{
+    color: #fff;
+    float: left;
+    width: 20px;
+    height: 20px;
+    background: #f60;
+    border-radius: 20px;
+    font:12px/20px Arial;
+    /*这里有个要点*/
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: center;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+  }
+  #box .list-number li.current{
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <ul class="list-image">
+      <li><img src="pic1.jpg" width="500px" height="200px"></li>
+      <li><img src="pic2.jpg" width="500px" height="200px"></li>
+      <li><img src="pic3.jpg" width="500px" height="200px"></li>
+      <li><img src="pic4.jpg" width="500px" height="200px"></li>
+      <li><img src="pic5.jpg" width="500px" height="200px"></li>
+    </ul>
+  </div>
+</body>
+<script>
+var oBox=document.getElementById("box");
+var oUl=oBox.getElementsByTagName("ul");
+var oImage=oUl[0].getElementsByTagName("li");
+//创建数组元素
+var tmp=[];
+for(var i=0;i<oImage.length;i++){
+  tmp.push("<li>"+(i+1)+"</li>");
+}
+//现在tmp中保存着五个<li>
+var oCount=document.createElement("ul");
+oCount.className="list-number";
+oCount.innerHTML=tmp.join('');
+oBox.appendChild(oCount);
+var index=0;
+oNumber=oCount.getElementsByTagName("li");
+for(var i=0;i<oNumber.length;i++){
+  oNumber[i].index=i;
+  oNumber[i].onmouseover=function(){
+    show(this.index);
+  }
+}
+function show(x){
+  for(var i=0;i<oNumber.length;i++)
+  {
+    oNumber[i].className="";
+  }
+  oNumber[x].className="current";
+  Move(x);
+}
+var timer=null;
+function Move(x){
+  clearInterval(timer);
+  //赋值的时候要加上"px"哦
+  target=-x*202;
+  timer=setInterval(function(){
+    var speed=(-x*202-oUl[0].offsetTop)/10;
+    //因为是当前值，所有这个speed可正可负，根据我们所处图片的位置和要切换的目的地不同而定
+    speed=speed>0?Math.ceil(speed):Math.floor(speed);
+    oUl[0].offsetTop==target?clearInterval(timer):oUl[0].style.top=oUl[0].offsetTop+speed+"px";
+},30)
+  index=x;//为了bug：若是我们先按了3，再来开进行自动轮播，它是从上一次index记录的开始自动。
+}
+var autotimer=null;
+oBox.onmouseout=function(){
+  auto();
+}
+oBox.onmouseover=function(){
+  clearInterval(autotimer);
+}
+function auto(){
+  autotimer=setInterval(function(){
+    if(index<oImage.length-1){
+      index++;
+    }else{
+      index=0;
+    }
+    show(index);
+  },2000)
+}
+auto();
+</script>
+</html>

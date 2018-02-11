@@ -87,7 +87,7 @@ const numList = oNumber.getElementsByTagName("li");
 // 接下来，便是世界改变的逻辑
 for (let i = 0; i < numList.length; i++) {
   // 关键：我们要把我们的 索引index 传进 onclick/onmouseover 里面
-  numList[i].onclick = () => {
+  numList[i].onmouseover = () => {
     clearNumState();
     show(i);
   }
@@ -98,11 +98,10 @@ const clearNumState = () => {
     item.className = "";
   }
 }
-// 滑动轮播
+// 滑动轮播,原则: 每次获取当前位置，每次滚动的时间应该一致。
+// 即是说，差的越远，滚动越快。
+let timer = null;
 const show = (index) => {
-  numList[index].className = "current";
-  const distance = -index * 250;
-  oImage.style.top = distance + "px";
 }
 </script>
 </html>
