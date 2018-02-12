@@ -105,22 +105,33 @@ const clearNumState = () => {
 let timer = null;
 
 const show = (index) => {
+  numList[index].className = "current";
   if (timer) clearInterval(timer);
-  const pre = oImage.offsetTop;
-  let now = pre;
-  const pos = -250 * index;
-  const dis = pos - pre;
-  const avg = dis / 10;
+  const target = -250 * index;
+  let now = oImage.offsetTop;
   timer = setInterval(() => {
-    if (now === pos) {
+    if (now === target) {
       clearInterval(timer);
     } else {
-      now += avg;
-      console.log(now);
-      oImage.style.top = now + "px";       
+      now += move(target);
+      oImage.style.top = now + "px";
+      console.log(oImage.offsetTop);
     }
   }, 20);
 }
-// 上面要注意的是
+// 加速运动 -> 均速运动 -> 减速运动
+const move = (target) => {
+  // 当前值
+  const now = oImage.offsetTop;
+  const differ = target - now;
+  console.log(differ / 10);
+  const res = differ > 0 ? Math.ceil(differ / 10) : Math.floor(differ / 10);
+  // 为什么呢？唉，基础差导致这里还写错了。
+  // 如果是 -0.1，我们要让它为 -1，所以这里要用地板(返回的值更小)
+  // -1 < -0.1
+  // 如果是 0.1, 我们要让它为 1,所以这里要用天花板(返回的值更大)
+  // 0.1 < 1
+  return res;
+}
 </script>
 </html>
