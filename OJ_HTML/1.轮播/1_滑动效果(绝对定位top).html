@@ -98,10 +98,29 @@ const clearNumState = () => {
     item.className = "";
   }
 }
-// 滑动轮播,原则: 每次获取当前位置，每次滚动的时间应该一致。
+// 滑动轮播,原则: 每次获取当前位置，每次滚动的时间应该一致。(这是效果)
 // 即是说，差的越远，滚动越快。
+// obj.offsetTop 指的是 obj 距离上方或者父级元素(position非static)的位置。
+// 整型。单位像素。属性为只读！！只读！！只读！！
 let timer = null;
+
 const show = (index) => {
+  if (timer) clearInterval(timer);
+  const pre = oImage.offsetTop;
+  let now = pre;
+  const pos = -250 * index;
+  const dis = pos - pre;
+  const avg = dis / 10;
+  timer = setInterval(() => {
+    if (now === pos) {
+      clearInterval(timer);
+    } else {
+      now += avg;
+      console.log(now);
+      oImage.style.top = now + "px";       
+    }
+  }, 20);
 }
+// 上面要注意的是
 </script>
 </html>
