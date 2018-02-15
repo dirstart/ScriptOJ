@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style type="text/css">
+	/* reset 样式 */
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	ul, li {
+		list-style: none;
+	}
+	/* common 样式 */
+	header h1,
+	header span {
+		text-align: center;
+	}
+	header span {
+		display: block;
+	}
+	ul {
+		margin-top: 10px;
+		width: 100%;
+		height: 600px;
+		background-color: #f0f0f0;
+	}
+	ul li {
+		margin-top: 20px;
+		width: 100%;
+		height: 180px;
+		background-color: #089e8a;
+	}
+	ul li div {
+		height: 100%;
+	}
+	/* 效果样式 */
+	.one {
+		position: relative;
+	}
+	.one .left {
+		position: absolute;
+		left: 0;
+		width: 100px;
+		background-color: #432199;
+	}
+	.one .right {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100px;
+		background-color: #903233;
+	}
+	.one .main {
+		margin-left: 100px;
+		margin-right: 100px;
+/*		position: absolute;
+		left: 100px;
+		right: 100px;*/
+		background-color: #888;
+		color: #fff;
+	}
+
+	.two .left,
+	.two .main,
+	.two .right {
+		float: left;
+	}
+	.two .left {
+		width: 100px;
+		background-color: #f90;
+	}
+	.two .main {
+		width: calc(100% - 200px);
+		background-color: #293922;
+		color: #fff;
+	}
+	.two .right {
+		width: 100px;
+		background-color: #980;
+	}
+</style>
+</head>
+<body>
+<header>
+	<h1>题目如下，三栏。左右各100px.三栏宽度为100%.</h1>
+	<span>实际上就是一个块级元素分三块。</span>
+</header>
+<hr>
+<ul>
+	<li class="one">
+		<div class="left">左</div>
+		<div class="main">中：绝对定位</div>
+		<div class="right">右</div>
+	</li>
+	<li class="two">
+		<div class="left">左</div>
+		<div class="main">中：cal计算属性</div>
+		<div class="right">右</div>
+	</li>
+	<li class="three">
+		<div class="left">左</div>
+		<div class="main">中</div>
+		<div class="right">右</div>
+	</li>
+</ul>
+</body>
+</html>
