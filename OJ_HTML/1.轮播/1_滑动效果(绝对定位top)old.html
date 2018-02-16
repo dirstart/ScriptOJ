@@ -4,56 +4,63 @@
   <meta charset="UTF-8">
   <title>Document</title>
 <style>
-body,div,ul,li{
+/* reset */
+body, div, ul, li {
   margin:0;
   padding:0;
   list-style: none;
   border: 0;
 }
 body{
-  background: #000;
+  background: #fff;
 }
-#box{
+/* wrap */
+#box {
+  position: relative;
   width: 502px;
   height: 202px;
-  margin:10px auto;
+  margin: 10px auto;
   border: 8px solid #002232;
-  position: relative;
+
   overflow: hidden;
 }
-#box .list-image{
-  /*border: 1px solid purple;*/
+/* image */
+#box .list-image {
+  position: absolute;
   width: 500px;
   height: 200px;
-  position: absolute;
 }
-#box .list-image li{
+#box .list-image li {
   border: 1px solid purple;
   width: 500px;
   height: 200px;
+  /*这里也设置宽高，解决的是默认行间距问题*/
 }
-#box .list-number{
-  z-index: 999;
+#box .list-image li img {
+  width: 500px;
+  height: 200px;
+}
+/* number */
+#box .list-number {
   position: absolute;
   right: 0;
   bottom: 5px;
 }
-#box .list-number li{
-  color: #fff;
+#box .list-number li {
   float: left;
+  margin-right: 10px;
   width: 20px;
   height: 20px;
-  background: #f60;
-  border-radius: 20px;
-  font:12px/20px Arial;
-  /*这里有个要点*/
-  margin-right: 10px;
-  cursor: pointer;
+  font: 12px / 20px Arial;
+  border-radius: 10px;
+  background-color: #f60;
   text-align: center;
+  color: #fff;
   opacity: 0.7;
-  filter: alpha(opacity=70);
+  filter: alpha(opacity = 70);
+  cursor: pointer;
 }
-#box .list-number li.current{
+#box .list-number li.current {
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -71,65 +78,69 @@ body{
   </div>
 </body>
 <script>
-var oBox=document.getElementById("box");
-var oUl=oBox.getElementsByTagName("ul");
-var oImage=oUl[0].getElementsByTagName("li");
-//创建数组元素
-var tmp=[];
-for(var i=0;i<oImage.length;i++){
-  tmp.push("<li>"+(i+1)+"</li>");
-}
-//现在tmp中保存着五个<li>
-var oCount=document.createElement("ul");
-oCount.className="list-number";
-oCount.innerHTML=tmp.join('');
-oBox.appendChild(oCount);
-var index=0;
-oNumber=oCount.getElementsByTagName("li");
-for(var i=0;i<oNumber.length;i++){
-  oNumber[i].index=i;
-  oNumber[i].onmouseover=function(){
-    show(this.index);
+  const oBox = document.getElementById("box");
+  const oUl = oBox.getElementsByTagName("ul")[0];
+  const oImage = oUl.getElementsByTagName("li");
+  // 根据图片 li 的个数生成同样数量的 按钮 li
+  let eleArr = [];
+  for (let i = 0; i < oImage.length; i++) {
+    eleArr.push("<li>" + (i + 1) + "</li>");
   }
-}
-function show(x){
-  for(var i=0;i<oNumber.length;i++)
-  {
-    oNumber[i].className="";
-  }
-  oNumber[x].className="current";
-  Move(x);
-}
-var timer=null;
-function Move(x){
-  clearInterval(timer);
-  //赋值的时候要加上"px"哦
-  target=-x*202;
-  timer=setInterval(function(){
-    var speed=(-x*202-oUl[0].offsetTop)/10;
-    //因为是当前值，所有这个speed可正可负，根据我们所处图片的位置和要切换的目的地不同而定
-    speed=speed>0?Math.ceil(speed):Math.floor(speed);
-    oUl[0].offsetTop==target?clearInterval(timer):oUl[0].style.top=oUl[0].offsetTop+speed+"px";
-},30)
-  index=x;//为了bug：若是我们先按了3，再来开进行自动轮播，它是从上一次index记录的开始自动。
-}
-var autotimer=null;
-oBox.onmouseout=function(){
-  auto();
-}
-oBox.onmouseover=function(){
-  clearInterval(autotimer);
-}
-function auto(){
-  autotimer=setInterval(function(){
-    if(index<oImage.length-1){
-      index++;
-    }else{
-      index=0;
+  // 创建节点元素并且添加节点元素至 html 里面
+  var oEle = document.createElement("ul");
+  oEle.className = "list-number";
+  oEle.innerHTML = eleArr.join("");
+  oBox.appendChild(oEle);
+  // 手动点击，触发轮播的触发函数
+  const oNumber = oEle.getElementsByTagName("li");
+  for (var i = 0; i < oNumber.length; i++) {
+    oNumber[i].index = i;
+    oNumber[i].onmouseover = function () {
+      Show(this.index);
     }
-    show(index);
-  },2000)
-}
-auto();
+  }
+  // 轮播触发，并且内部调用移动效果函数
+  function Show(index) {
+    for (let i = 0; i < oNumber.length; i++) {
+      oNumber[i].className = "";
+    }
+    oNumber[index].className = "current";
+    Move(index);
+  }
+  // 移动效果函数
+  let timer = null;
+  function Move(index) {
+    clearInterval(timer);
+    let target = -index * 202;
+    timer = setInterval(function() {
+      let speed = (target - oUl.offsetTop) / 10;
+      // 速度为 目标位置 - 当前位置
+      speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+      oUl.offsetTop === target ? clearInterval(timer) : oUl.style.top = oUl.offsetTop + speed + "px";
+      // 没有到达目标，则不停止。
+    }, 30);
+  }
+
+  // 添加自动轮播函数
+  let nowIndex = 0;
+  let autoTimer = null;
+  oBox.onmouseout = function() {
+    auto();
+  }
+  oBox.onmouseover = function() {
+    clearInterval(autoTimer);
+  }
+  function auto() {
+    autoTimer = setInterval(() => {
+      if (nowIndex < oImage.length - 1) {
+        nowIndex ++;
+      } else {
+        nowIndex = 0;
+      }
+      Show(nowIndex);
+    }, 2000);
+  }
+  auto();
+  // 起始的时候默认开始
 </script>
 </html>

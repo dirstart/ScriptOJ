@@ -3,35 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <style>
-  #left {
-    background: red;
-    width: 100px;
-    position: absolute;
-    left: 0;
-    height: 100px;
-  }
-  </style>
-  <script type="text/javascript">
-    window.onload = function() {
-    	var oId = document.getElementById("left");
-    	var oBody = document.getElementsByTagName("body")[0];
-    	console.log(getStyle(oId, 'paddingTop')); //0px
-    	console.log(getStyle(oBody, 'marginTop')); //!!!!!!--8px
-    	console.log(getStyle(oBody, 'paddingTop')); //0px
-    }
-    function getStyle(obj, attr) {
-    	if (obj.currentStyle) {
-    		return obj.currentStyle[attr];
-    	} else {
-    		return document.defaultView.getComputedStyle(obj, null)[attr];
-    	}
-    }
-  </script>
+<style>
+/* reset */
+body, div, ul, li {
+  margin:0;
+  padding:0;
+  list-style: none;
+  border: 0;
+}
+body{
+  background: #fff;
+}
+/* wrap */
+#box {
+	position: relative;
+  width: 502px;
+  height: 202px;
+  margin: 10px auto;
+  border: 8px solid #002232;
+
+  overflow: hidden;
+}
+/* image */
+#box .list-image {
+	position: absolute;
+  width: 500px;
+  height: 200px;
+}
+#box .list-image li {
+	border: 1px solid purple;
+	width: 500px;
+	height: 200px;
+	/*这里也设置宽高，解决的是默认行间距问题*/
+}
+#box .list-image li img {
+	width: 500px;
+	height: 200px;
+}
+/* number */
+#box .list-number {
+	position: absolute;
+	right: 0;
+	bottom: 5px;
+}
+#box .list-number li {
+	float: left;
+	margin-right: 10px;
+	width: 20px;
+	height: 20px;
+	font: 12px / 20px Arial;
+	border-radius: 10px;
+	background-color: #f60;
+	text-align: center;
+	color: #fff;
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+	cursor: pointer;
+}
+#box .list-number li.current {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+</style>
 </head>
 <body>
-  <div id="left"></div>
-  <div id="main"></div>
-  <div id="right"></div>
+  <div id="box">
+    <ul class="list-image">
+      <li><img src="pic1.jpg" width="500px" height="200px"></li>
+      <li><img src="pic2.jpg" width="500px" height="200px"></li>
+      <li><img src="pic3.jpg" width="500px" height="200px"></li>
+      <li><img src="pic4.jpg" width="500px" height="200px"></li>
+      <li><img src="pic5.jpg" width="500px" height="200px"></li>
+    </ul>
+  </div>
 </body>
+<script>
+	const oBox = document.getElementById("box");
+	const oUl = oBox.getElementsByTagName("ul")[0];
+	const oImage = oUl.getElementsByTagName("li");
+	// 根据图片 li 的个数生成同样数量的 按钮 li
+	let eleArr = [];
+	for (let i = 0; i < oImage.length; i++) {
+		eleArr.push("<li>" + (i + 1) + "</li>");
+	}
+	// 创建节点元素并且添加节点元素至 html 里面
+	var oEle = document.createElement("ul");
+	oEle.className = "list-number";
+	oEle.innerHTML = eleArr.join("");
+	oBox.appendChild(oEle);
+	// 手动点击，触发轮播的触发函数
+	const oNumber = oEle.getElementsByTagName("li");
+	for (var i = 0; i < oNumber.length; i++) {
+		oNumber[i].index = i;
+		oNumber[i].onmouseover = function () {
+			Show(this.index);
+		}
+	}
+	// 轮播触发，并且内部调用移动效果函数
+	function Show(index) {
+		for (let i = 0; i < oNumber.length; i++) {
+			oNumber[i].className = "";
+		}
+		oNumber[index].className = "current";
+		Move(index);
+	}
+	// 移动效果函数
+	let timer = null;
+	function Move(index) {
+		clearInterval(timer);
+		let target = -index * 202;
+		timer = setInterval(function() {
+			let speed = (target - oUl.offsetTop) / 10;
+			// 速度为 目标位置 - 当前位置
+			speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+			oUl.offsetTop === target ? clearInterval(timer) : oUl.style.top = oUl.offsetTop + speed + "px";
+			// 没有到达目标，则不停止。
+		}, 30);
+	}
+
+	// 添加自动轮播函数
+	let nowIndex = 0;
+	let autoTimer = null;
+	oBox.onmouseout = function() {
+		auto();
+	}
+	oBox.onmouseover = function() {
+		clearInterval(autoTimer);
+	}
+	function auto() {
+		autoTimer = setInterval(() => {
+			if (nowIndex < oImage.length - 1) {
+				nowIndex ++;
+			} else {
+				nowIndex = 0;
+			}
+			Show(nowIndex);
+		}, 2000);
+	}
+	auto();
+	// 起始的时候默认开始
+</script>
 </html>
