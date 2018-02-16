@@ -15,6 +15,7 @@ trimTail(one);
 // 3.去掉首尾的空格
 const trimHeadTail = (str) => {
   const res = str.replace(/(^\s*)|(\s*$)/g, "");
+  // const res = str.replace(/^\s*|\s*$/g, "");
   console.log(res, res.length);
 }
 trimHeadTail(one);
