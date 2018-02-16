@@ -3,14 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <style>
+  #left {
+    background: red;
+    width: 100px;
+    position: absolute;
+    left: 0;
+    height: 100px;
+  }
+  </style>
+  <script type="text/javascript">
+    window.onload = function() {
+    	var oId = document.getElementById("left");
+    	var oBody = document.getElementsByTagName("body")[0];
+    	console.log(getStyle(oId, 'paddingTop')); //0px
+    	console.log(getStyle(oBody, 'marginTop')); //!!!!!!--8px
+    	console.log(getStyle(oBody, 'paddingTop')); //0px
+    }
+    function getStyle(obj, attr) {
+    	if (obj.currentStyle) {
+    		return obj.currentStyle[attr];
+    	} else {
+    		return document.defaultView.getComputedStyle(obj, null)[attr];
+    	}
+    }
+  </script>
 </head>
 <body>
-  <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-  </ul>
+  <div id="left"></div>
+  <div id="main"></div>
+  <div id="right"></div>
 </body>
-<script type="text/javascript">
-</script>
 </html>
