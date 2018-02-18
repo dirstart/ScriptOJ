@@ -1,8 +1,16 @@
-"use strict";
-const o =Object.create(null, {
-  'x': {
-    value: 1,
-    configurable: true
+var obj = {
+  value: 0,
+}
+
+global.a = 8;
+
+obj.double = function() {
+  console.log(this.value);
+  var oThat = this;
+  var test = function() {
+    console.log(this.a);
   }
-});
-delete o.x;
+  test();
+}
+
+obj.double();
