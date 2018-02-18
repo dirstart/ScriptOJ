@@ -126,6 +126,7 @@ window.onload = function() {
     autoTimer = setInterval(() => {
       show(index);
       index < numList.length - 1 ? index++ : index = 0;
+      console.log(index);
     }, 2000);
   }
   auto();

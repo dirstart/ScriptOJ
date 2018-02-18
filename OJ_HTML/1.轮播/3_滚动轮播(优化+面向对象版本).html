@@ -79,62 +79,70 @@
   </div>
 </body>
 <script type="text/javascript">
-window.onload = function() {
-  const oImage = document.getElementsByClassName("pic-group")[0];
-  const imageList = oImage.getElementsByTagName("li");
-  const oHeight = imageList[0].offsetHeight;
-  const oNumber = document.getElementsByClassName("num-group")[0];
-  const numList = oNumber.getElementsByTagName("li");
-  let autoTimer = null;
-  let index = 0;
-
-  for (let i = 0; i < numList.length; i++) {
-    numList[i].onmouseover = () => {
-      index = i;
-      show(i);
-    }
-  }
-  const clearNumState = () => {
-    for (const item of numList) {
-      item.className = "";
-    }
-  }
-  let timer = null;
-
-  const show = (index) => {
-    clearNumState();
-    numList[index].className = "current";
-    if (timer) clearInterval(timer);
-    const target = -oHeight * index;
-    let now = oImage.offsetTop;
-    timer = setInterval(() => {
-      if (now === target) {
-        clearInterval(timer);
-      } else {
-        now += move(target);
-        oImage.style.top = now + "px";
+var Carousel = function(cname) {
+  this.init(cname);
+}
+Carousel.prototype = {
+  init: function(cname) {
+    let me = this;
+    me.oWrap = document.getElementsByClassName(cname)[0];
+    me.oImage = me.oWrap.getElementsByTagName("ul")[0];
+    me.imageList = me.oImage.getElementsByTagName("li");
+    me.imageHeight = me.imageList[0].offsetHeight;
+    me.oNumber = me.oWrap.getElementsByTagName("ol")[0];
+    me.numberList = me.oNumber.getElementsByTagName("li");
+    me.index = 0;
+    me.moveTimer = null;
+    me.autoTimer = null;
+    for (let i = 0; i < me.numberList.length; i++) {
+      me.numberList[i].onmouseover = function() {
+        me.index = i;
+        me.Show(i);
       }
+    }
+    me.Auto();
+    me.oImage.onmouseover = function() {
+      clearInterval(me.autoTimer);
+    }
+    me.oImage.onmouseout = function() {
+      me.Auto();
+    }
+  },
+  Show: function(index) {
+    let me = this;
+    me.clearClass(index);
+    me.Move(index);
+  },
+  Move(index) {
+    let me = this;
+    let target = -index * me.imageHeight;
+    let now;
+    let speed;
+    if (me.moveTimer) clearInterval(me.moveTimer);
+    me.moveTimer = setInterval(() => {
+      now = me.oImage.offsetTop;
+      speed = (target - now) / 10;
+      speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+      now === target ? clearInterval(me.moveTimer) : me.oImage.style.top = now + speed + "px";
     }, 20);
-  }
-  const move = (target) => {
-    const now = oImage.offsetTop;
-    const differ = target - now;
-    const res = differ > 0 ? Math.ceil(differ / 10) : Math.floor(differ / 10);
-    return res;
-  }
-  const auto = () => {
-    autoTimer = setInterval(() => {
-      show(index);
-      index < numList.length - 1 ? index++ : index = 0;
+  },
+  Auto() {
+    let me = this;
+    me.autoTimer = setInterval(() => {
+      me.index < me.imageList.length - 1 ? me.index++ : me.index = 0;
+      me.Show(me.index);
     }, 2000);
+  },
+  clearClass(index) {
+    let me = this;
+    for (let i = 0; i < me.numberList.length; i++) {
+      me.numberList[i].className = "";
+    }
+    me.numberList[index].className = "current";
   }
-  auto();
-  oImage.onmouseover = function() {
-    if (autoTimer) clearInterval(autoTimer);
-  }
-  oImage.onmouseout = function() {
-    auto();
-  }
+}
+window.onload = function() {
+  new Carousel("wrap");
 }
 </script>
 </html>
