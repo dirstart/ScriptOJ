@@ -69,18 +69,72 @@
       <li><img src="./pic4.jpg" alt=""></li>
       <li><img src="./pic5.jpg" alt=""></li>
     </ul>
+    <ol class="num-group">
+      <li class="current">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ol>
   </div>
 </body>
 <script type="text/javascript">
-  var obj = function(className) {
-    console.log(className);
-    this.init(className);
-  }
-  obj.prototype = {
-    init: function(className) {
-      console.log(className);
+window.onload = function() {
+  const oImage = document.getElementsByClassName("pic-group")[0];
+  const imageList = oImage.getElementsByTagName("li");
+  const oHeight = imageList[0].offsetHeight;
+  const oNumber = document.getElementsByClassName("num-group")[0];
+  const numList = oNumber.getElementsByTagName("li");
+  let autoTimer = null;
+  let index = 0;
+
+  for (let i = 0; i < numList.length; i++) {
+    numList[i].onmouseover = () => {
+      index = i;
+      show(i);
     }
   }
-  obj("cs");
+  const clearNumState = () => {
+    for (const item of numList) {
+      item.className = "";
+    }
+  }
+  let timer = null;
+
+  const show = (index) => {
+    clearNumState();
+    numList[index].className = "current";
+    if (timer) clearInterval(timer);
+    const target = -oHeight * index;
+    let now = oImage.offsetTop;
+    timer = setInterval(() => {
+      if (now === target) {
+        clearInterval(timer);
+      } else {
+        now += move(target);
+        oImage.style.top = now + "px";
+      }
+    }, 20);
+  }
+  const move = (target) => {
+    const now = oImage.offsetTop;
+    const differ = target - now;
+    const res = differ > 0 ? Math.ceil(differ / 10) : Math.floor(differ / 10);
+    return res;
+  }
+  const auto = () => {
+    autoTimer = setInterval(() => {
+      show(index);
+      index < numList.length - 1 ? index++ : index = 0;
+    }, 2000);
+  }
+  auto();
+  oImage.onmouseover = function() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+  oImage.onmouseout = function() {
+    auto();
+  }
+}
 </script>
 </html>

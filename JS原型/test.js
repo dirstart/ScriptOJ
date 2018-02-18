@@ -1,5 +1,3 @@
-String.prototype.trim = function () {
-  return this.replace(/^\s*|\s*$/g, '');
-}
+console.log(Number("132abc"), parseInt("132abc"));
 
-console.log('   haha'.trim());
+console.log(parseInt("070"));
