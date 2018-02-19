@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="box">
+    <li class="current">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+  </ul>
+</body>
+<script>
+window.onload = function() {
+  const a = document.getElementById('box');
+  const b = document.getElementsByClassName('current');
+  const c = document.getElementsByTagName('li');
+  // querySelector -- 可以 类似 tag，也可以获取 id
+  const d = document.querySelector('li');
+  const e = document.querySelector('#box');
+  const f = document.querySelector('.current');
+  console.log(a, b, c); 
+  console.log(d, e, f);
+  // document
+  console.log(document.documentElement.offsetHeight); // 158
+  console.log(document.body.offsetHeight); // 126
+  // 加上了 margin:0; padding:0; 则两者相等。
+  // 原因是 ul 自带 margin 值，上下均为 8px
+  // html 自带 8px
+  // li 没有 margin 和 padding
+}
+</script>
+</html>
