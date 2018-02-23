@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>12</h1>
+  <ul>
+    <li>a</li>
+    <li>b</li>
+    <li>c</li>
+  </ul>
+</body>
+<script type="text/javascript">
+  const walkDom = (node, func) => {
+    func(node);
+    node = node.firstChild;
+    while(node) {
+      walk(node, func);
+      node = node.nextSibling;
+    }
+  }
+
+  const getElementByAttr = (att, value) => {
+    let results = [];
+    walkDom(document.body, function(node) {
+      const actual = node.nodeType === 1 && node.getAttribute(att);
+      if (typeof actual === 'string' && (actual === value || typeof value !== 'string')) {
+        results.push(node);
+      }
+    });
+  }
+</script>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul, li {
+      list-style: none;
+    }
+    body {
+      background-color: #000;
+    }
+    .wrap {
+      position: relative;
+      border: 8px solid #fff;
+      margin: 100px auto;
+      width: 400px;
+      height: 250px;
+      overflow: hidden;
+    }
+    .pic-group {
+      position: absolute;
+    }
+    .pic-group li img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .num-group {
+      position: absolute;
+      bottom: 5px;
+      right: 0;
+      height: 20px;
+    }
+    .num-group li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 10px;
+      margin-right: 10px;
+      background-color: #089e8a;
+      color: #eee;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    .num-group li:hover {
+      box-shadow: 0 0 18px #000;
+    }
+    .num-group li.current {
+      opacity: 1;
+      color: #089a8a;
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <ul class="pic-group">
+      <li><img src="./pic1.jpg" alt=""></li>
+      <li><img src="./pic2.jpg" alt=""></li>
+      <li><img src="./pic3.jpg" alt=""></li>
+      <li><img src="./pic4.jpg" alt=""></li>
+      <li><img src="./pic5.jpg" alt=""></li>
+    </ul>
+    <ol class="num-group">
+      <li class="current">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ol>
+  </div>
+</body>
+<script type="text/javascript">
+window.onload = function() {
+  const oImage = document.getElementsByClassName("pic-group")[0];
+  const imageList = oImage.getElementsByTagName("li");
+  const oHeight = imageList[0].offsetHeight;
+  const oNumber = document.getElementsByClassName("num-group")[0];
+  const numList = oNumber.getElementsByTagName("li");
+  let autoTimer = null;
+  let index = 0;
+
+  for (let i = 0; i < numList.length; i++) {
+    numList[i].onmouseover = () => {
+      index = i;
+      show(i);
+    }
+  }
+  const clearNumState = () => {
+    for (const item of numList) {
+      item.className = "";
+    }
+  }
+  let timer = null;
+
+  const show = (index) => {
+    clearNumState();
+    numList[index].className = "current";
+    if (timer) clearInterval(timer);
+    const target = -oHeight * index;
+    let now = oImage.offsetTop;
+    timer = setInterval(() => {
+      if (now === target) {
+        clearInterval(timer);
+      } else {
+        now += move(target);
+        oImage.style.top = now + "px";
+      }
+    }, 20);
+  }
+  const move = (target) => {
+    const now = oImage.offsetTop;
+    const differ = target - now;
+    const res = differ > 0 ? Math.ceil(differ / 10) : Math.floor(differ / 10);
+    return res;
+  }
+  const auto = () => {
+    autoTimer = setInterval(() => {
+      show(index);
+      index < numList.length - 1 ? index++ : index = 0;
+      console.log(index);
+    }, 2000);
+  }
+  auto();
+  oImage.onmouseover = function() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+  oImage.onmouseout = function() {
+    auto();
+  }
+}
+</script>
+</html>
