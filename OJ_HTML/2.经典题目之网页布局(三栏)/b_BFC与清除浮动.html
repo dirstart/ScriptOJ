@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BFC布局</title>
+  <style type="text/css">
+  * {margin: 0;padding: 0;}
+  .left {
+    width: 100px;
+    height: 100px;
+    background-color:#FCE38A;
+    float: left;
+  }
+  .right {
+    width: 300px;
+    height: 150px;
+    background-color: #95E1D3;
+    /*overflow: hidden;*/
+  }
+  </style>
+</head>
+<body>
+  <p class= "left"></p>
+  <p class="right"></p>
+  <div>根据BFC规则：每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)，即使存在浮动也是如此。
+  <hr>
+  所以即使left设置了左浮动，right的的左边依然会与包含块的左边（即body）相接触。接着我们可以根据规则1，BFC的区域不会与float box重叠</div>
+  <hr>
+  <div>
+    让right触发产生BFC，这样right就不会与left重叠了
+  </div>
+</body>
+</html>
