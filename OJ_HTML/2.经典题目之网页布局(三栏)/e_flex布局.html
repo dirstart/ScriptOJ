@@ -8,7 +8,27 @@
       margin: 0;
       padding: 0;
     }
-    
+    .container {
+      display: flex;
+    }
+    .main {
+      flex-grow: 1;
+      height: 300px;
+      background-color: #95e1d3;
+    }
+    .left {
+      order: -1;
+      flex: 0 1 200px;
+      margin-right: 50px;
+      height: 300px;
+      background-color: #fce38a;
+    }
+    .right {
+      flex: 0 1 200px;
+      margin-left: 50px;
+      height: 300px;
+      background-color: #eaffd0;
+    }
   </style>
 </head>
 <body>
