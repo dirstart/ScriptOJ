@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>jsonp</h1>
+	<button>开始跨域</button>
+</body>
+<script type="text/javascript">
+	function test(data) {
+		console.log("接收到服务器的数据", data);
+	}
+	// 注意：上面的回调的方法必须为全局方法！！！
+	const oBtn = document.getElementsByTagName("button")[0];
+	oBtn.onclick = () => {
+		const script = document.createElement('script');
+		script.src = "http://127.0.0.1:3000/jsonp?callback=test";
+		document.body.appendChild(script);
+	}
+</script>
+<!-- <script src="http://127.0.0.1:3000/jsonp?callback=test"></script>
+ -->
+ </html>
