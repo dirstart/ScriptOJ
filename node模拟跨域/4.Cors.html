@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.onload = function(){
+alert(xhr.responseText);
+};
+xhr.open('POST', 'http://localhost:3000/cors', true);
+xhr.setRequestHeader("Content-Type", "text/html");
+xhr.send("f=json");
+</script>
+</html>
