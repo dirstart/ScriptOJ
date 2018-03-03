@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    ul, li {
+      list-style: none;
+    }
+    ul {
+      margin-top: 30px;
+      padding: 30px 30px;
+      font-size: 0;
+      background-color: #000;
+    }
+    li {
+      margin-top: 30px;
+      margin-right: 100px;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+    }
+    li:first-child {
+      width: 0;
+      height: 0;
+      border-width: 100px;
+      border-style: solid;
+      border-color: red blue green yellow;
+    }
+    li:nth-child(2) {
+      width: 0;
+      height: 0;
+      border-width: 100px;
+      border-style: solid;
+      border-color: green transparent transparent transparent;
+    }
+    li:nth-child(3) {
+      width: 0;
+      height: 0;
+      border-width: 100px;
+      border-style: solid;
+      border-color: green yellow red blue;
+      border-radius: 50%;
+    }
+    li:nth-child(4) {
+      width: 0;
+      height: 0;
+      border-width: 100px;
+      border-style: solid;
+      border-color: green transparent transparent transparent;
+      border-radius: 50%;
+    }
+    li:nth-child(5) {
+      width: 200px;
+      height: 100px;
+      background-color: blue;
+      border-radius: 180px 0;
+    }
+    li:nth-child(6) {
+      width: 200px;
+      height: 100px;
+      background-color: green;
+    }
+    li:nth-child(7) {
+      width: 200px;
+      height: 100px;
+      background-color: red;
+      border-radius: 100px 0 0 0;
+    }
+    li:nth-child(8) {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px 0 0 0;
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+</html>

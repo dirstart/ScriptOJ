@@ -42,10 +42,31 @@
     text-align: center;
     background-color: #4B4B5A;
   }
+  pre {
+    margin: 10px auto;
+    display: block;
+    width: 800px;
+    height: 200px;
+    border: 1px dotted #084308;
+    background-color: #6C8876;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 100px;
+  }
 </style>
 </head>
 <body>
-  <div id="box" style="height:100px;">height:100px</div>  
+  <div id="box" style="height:100px;">height:100px</div>
+  <pre>
+    兼容方法：
+function getStyle(ele, attr) {
+  if (window.getComputedStyle) {
+    return window.getComputedStyle(ele, null)[attr];
+  } else {
+    return element.currentStyle[attr];
+  }
+}
+  </pre>
 </body>
 <script type="text/javascript">
 // 为了支持 IE 9， 不使用 const
@@ -62,7 +83,7 @@ for (var i = 0; i < 5; i++) {
   spanArr.push(span);
   p.appendChild(button);
   p.appendChild(span);
-  document.body.appendChild(p);
+  insertAfter(p, oBox);
 }
 // Way 1 - offsetHeight
 buttonArr[0].onclick = function() {
@@ -85,5 +106,22 @@ buttonArr[4].onclick = function() {
   spanArr[4].innerHTML = document.defaultView.getComputedStyle(oBox, null)["height"];
 }
 
+function insertAfter(newEle, oldEle) {
+  var parent = oldEle.parentNode;
+  if (parent.lastChild === oldEle) {
+    parent.appendChild(newEle);
+  } else {
+    parent.insertBefore(newEle, oldEle.nextSibling);
+  }
+}
+
+function getStyle(ele, attr) {
+  if (window.getComputedStyle) {
+    return window.getComputedStyle(ele, null)[attr];
+  } else {
+    return element.currentStyle[attr];
+  }
+}
+console.log(getStyle(oBox, "height"));
 </script>
 </html>
