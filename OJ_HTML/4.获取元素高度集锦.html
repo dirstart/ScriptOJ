@@ -3,19 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <style type="text/css">
-    div {
-      width: 100px;
-      height: 100px;
-      background-color: #f0f;
-    }
-  </style>
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background-color: #082122;
+  }
+  #box {
+    margin-left: 200px;
+    width: 100px;
+    height: 200px;
+    background-color: #089e8a;
+  }
+  p {
+    margin-top: 10px;
+    width: 100%;
+    background-color: #483834;
+  }
+  button {
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #083233;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  span {
+    display: inline-block;
+    width: 400px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #4B4B5A;
+  }
+</style>
 </head>
 <body>
-  <div>123</div>  
+  <div id="box" style="height:100px;">height:100px</div>  
 </body>
 <script type="text/javascript">
-  const oDiv = document.getElementsByTagName("div")[0];
-  console.log(oDiv.offsetHeight);
+// 为了支持 IE 9， 不使用 const
+var buttonArr = [], spanArr = [];
+var oBox = document.getElementById('box');
+var textArr = ["offsetHeight", "currentStyle", "style", "getComputedStyle", "getComputedStyle2"];
+for (var i = 0; i < 5; i++) {
+  var p = document.createElement("p");
+  var button = document.createElement("button");
+  var span = document.createElement("span");
+  button.innerHTML = textArr[i];
+  span.innerHTML = "点击左边查看结果";
+  buttonArr.push(button);
+  spanArr.push(span);
+  p.appendChild(button);
+  p.appendChild(span);
+  document.body.appendChild(p);
+}
+// Way 1 - offsetHeight
+buttonArr[0].onclick = function() {
+  spanArr[0].innerHTML = oBox.offsetHeight;
+}
+// Way 2 - 只只只支持 IE  - element.currentStyle
+buttonArr[1].onclick = function() {
+  spanArr[1].innerHTML = oBox.currentStyle;
+}
+// Way 3 - 只只只支持 内嵌style - element.style
+buttonArr[2].onclick = function() {
+  spanArr[2].innerHTML = oBox.style.height;
+}
+// Way 4 - 最后结算的(最好的) style  - window.getComputedStyle(element,presudo)[attr]
+buttonArr[3].onclick = function() {
+  spanArr[3].innerHTML = window.getComputedStyle(oBox, null)["height"];
+}
+// Way 5 - 跟 4 没有很大差别的 - document.defaultView.getComputedStyle(element,presudo)[attr]
+buttonArr[4].onclick = function() {
+  spanArr[4].innerHTML = document.defaultView.getComputedStyle(oBox, null)["height"];
+}
+
 </script>
 </html>
