@@ -30,9 +30,9 @@ b.show();
 
 // 3.若是都绑定起来，像是 jquery 的链式调用
 // 要怎么改变呢？在function 里面是否可以直接改变this。
-String.prototype.trimX = function() {
-	this = "haha";
-}
-let str = " t est ";
-str.trimX();
-str.show();
+
+// todo
+
+// 4. 其实！！！！ ES5 之后本来就有 trim 方法。。。。
+
+console.log("基本类型中自带的:", a.trim());
