@@ -49,11 +49,14 @@ li:nth-child(1) div {
   position: absolute;
   width: 0;
   height: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #AA9BCF;
   border-radius: 10px;
   transition: width .8s;
 }
-li:hover div {
+li:nth-child(1):hover div {
   width: 100%;
   height: 100%;
   transition: width .8s;
@@ -74,19 +77,70 @@ li:nth-child(2):hover .a {
   transition: width .8s;
   /*-webkit-transition: width .8s;*/
 }
+li:nth-child(3){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+li:nth-child(3) div {
+  /*position: absolute;*/
+  width: 0;
+  height: 60px;
+  background-color: #5A1B4E;
+  border-radius: 10px;
+  transition: all .8s;
+}
+li:nth-child(3):hover div {
+  width: 100%;
+  transition: all .8s;
+}
+li:nth-child(3) span {
+  position: absolute;
+}
+li:nth-child(4) {
+  position: relative;
+  transition: all .8s;
+}
+li:nth-child(4):before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 60px;
+  transition: all .8s;
+}
+li:nth-child(4):hover:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  transition: all .8s;
+  background-color: #000;
+}
+li:nth-child(4) div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>  
 </head>  
 <body>  
   <ul>  
     <li>我旁边有一个空的div<div></div></li>
-    <li><div class="a"></div></li>
-    <li>靠近我</li>
-    <li>靠近我</li>
+    <li><div class="a">margin:0 auto</div></li>
+    <li><div></div><span>三层结构</span></li>
+    <li><div>双层结构</div></li>
     <li>靠近我</li>  
   </ul> 
   <div id="box">
-    <span>方案一：A.margin:0 auto;实现居中从而从中间打开效果。</span>
-    <span>方案二：效果就很好。但是里面不能放东西。一放东西，原来的div就跑到了楼下去了</span>
+    <span>方案一: 双层结构。通过transform:translate(-50%, -50%)配合top/left:50% 实现垂直居中 -> 实现中心扩散。---- 缺陷：父元素的字被遮挡。</span>
+    <span>方案二: 双层结构。原字形已经崩了。margin: 0 atuo实现的居中。但是里面不能放东西。一放东西，原来的div就跑到了楼下去了</span>
+    <span>方案三: 三层结构。采用了flex的垂直居中方式。结构太多了这样。其中的字体元素采用了absolute从而处于位置的最上方，基本实现了需求。</span>
+    <span>方案四：双层结构。采用父层元素的 before 伪元素来实现此功能。同时子层元素也用absolute定位，使其位于最高层。</span>
   </div>
 </body>  
 </html
