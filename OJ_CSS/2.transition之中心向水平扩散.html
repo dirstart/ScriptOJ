@@ -1,0 +1,92 @@
+<!doctype html>  
+<html>  
+<head>  
+<style>
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+ul, li {
+  list-style: none;
+}
+/* common */
+#box span {
+  display: inline-block;
+  background-color: #2640E1;
+  width: 100%;
+  border: 1px solid #089e8a;
+  line-height: 50px;
+  color: #fff;
+}
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 400px;
+  background-color: #28BE58;
+}
+li {
+  position: relative;
+  width: 200px;
+  line-height: 60px;
+  text-align: center;
+  color: #fff;
+  height: 60px;
+  background-color: #A8C1B4;
+  border-radius: 10px;
+  cursor: pointer;
+}
+/* main */
+
+/* first */
+li:nth-child(1) {
+  position: relative;
+}
+li:nth-child(1) div {
+  position: absolute;
+  width: 0;
+  height: 60px;
+  background-color: #AA9BCF;
+  border-radius: 10px;
+  transition: width .8s;
+}
+li:hover div {
+  width: 100%;
+  height: 100%;
+  transition: width .8s;
+  -webkit-transition: width .8s;
+}
+/* second */
+li:nth-child(2) .a {
+  background-color: #A1E8BB;
+  width: 0;
+  height: 60px;
+  border-radius: 10px;
+  margin: 0 auto;
+  transition: width .8s; 
+  /*-webkit-transition: width .8s;*/
+}
+li:nth-child(2):hover .a {
+  width: 100% ;
+  transition: width .8s;
+  /*-webkit-transition: width .8s;*/
+}
+</style>  
+</head>  
+<body>  
+  <ul>  
+    <li>我旁边有一个空的div<div></div></li>
+    <li><div class="a"></div></li>
+    <li>靠近我</li>
+    <li>靠近我</li>
+    <li>靠近我</li>  
+  </ul> 
+  <div id="box">
+    <span>方案一：A.margin:0 auto;实现居中从而从中间打开效果。</span>
+    <span>方案二：效果就很好。但是里面不能放东西。一放东西，原来的div就跑到了楼下去了</span>
+  </div>
+</body>  
+</html
