@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html,body {
+    height: 100%;
+  }
+  #box {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: #9B66F9;
+    color: #fff;
+    letter-spacing: 2px;
+    text-indent: 10px;
+    font-size: 20px;
+  }
+  pre {
+    border: 1px dotted #089e8a;
+    background-color: #645656;
+  }
+  #box2 {
+    float: left;
+    width: 49vw;
+    height: 100vh;
+    background-color: #C382F1;
+    color: #fff;
+    letter-spacing: 2px;
+    text-indent: 10px;
+    font-size: 20px;
+  }
+</style>
+</head>
+<body>
+  <div id="box">
+    1.按照百分比设置的子元素，参照父元素的长度
+    2.如果设置 div 高度100%，参照物为 body，而 body(在标准模式下) 的高度参照的是 html根节点 的高度。所以，body和html都要设置为100%(标准模式下)。
+    <pre>
+    html,body {
+      height: 100%;
+    }
+    之后子元素设置 百分比的相对高度即可。
+    </pre>
+  </div>
+  <div id="box2">
+    1.直接使用 vh,vw 等相对屏幕而言的 宽度即可。1vh为屏幕的 1%。
+    <pre>
+    #box2 {
+      width: 100vw;
+      height: 100vh;
+    }
+    </pre>
+  </div>
+</body>
+</html>
