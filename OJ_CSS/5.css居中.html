@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  div {
+    width: 200px;
+    height: 100px;
+    background-color: #f0f0f0;
+  }
+  .out {
+    margin-bottom: 10px;
+  }
+  .in {
+    width: 100px;
+    height: 80px;
+    background-color: #ABEDDA; 
+  }
+  .out1 {
+    margin: 0 auto;
+  }
+  .one {
+    margin: 0 auto; 
+    line-height: 80px;
+    text-align: center;
+  }
+  .out2 {
+    position: relative;
+  }
+  .two {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .out3 {
+    position: relative;
+  }
+  .three {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -40px;
+  }
+  .out4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .four {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .out5 {
+    position: relative;
+  }
+  .five {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .out6 {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .six {
+    display: inline-block;
+  }
+</style>
+<body>
+  <div class="out out1">
+    <div class="in one">不需要知道高度</div>
+  </div>
+  <div class="out out2">
+    <div class="in two">不需要知道高度</div>
+  </div>
+  <div class="out out3">
+    <div class="in three">需要知道高度</div>
+  </div>
+  <div class="out out4">
+    <div class="in four ">不需要知道高度</div>
+  </div>
+  <div class="out out5">
+    <div class="in five ">不需要知道高度</div>
+  </div>
+  <div class="out out6">
+    <div class="in six ">不需要知道高度</div>
+  </div>
+</body>
+</html>
