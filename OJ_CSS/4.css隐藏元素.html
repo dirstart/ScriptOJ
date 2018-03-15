@@ -18,6 +18,7 @@
       justify-content: center;
     }
     li {
+      border: 2px solid #7F3FE5;
       display: flex;
       margin-top: 10px;
       margin-right: 50px;
@@ -36,13 +37,19 @@
       transform: rotate(-7deg);
     }
     div {
-      display: table-cell;
-      vertical-align: middle;
+      text-align: center;
       width: 200px;
       height: 200px;
       color: #fff;
       background-color: #ECD368;
       font-size: 20px;
+      transition: all .3s;
+      white-space: normal;
+    }
+    div:hover {
+      transform: scale(0.8);
+      opacity: 0.6;
+      transition: all .3s;
     }
   </style>
 </head>
@@ -50,47 +57,46 @@
   <ul>
     <li>
       <p style="display: none;"></p>
-      <div>display:none</div>
+      <div>display:none(不占据空间，无法点击)</div>
     </li>
     <li>
       <p style="visibility: hidden;"></p>
-      <div>visibility:hidden</div>
+      <div>visibility:hidden(占据空间，无法点击)</div>
     </li>
     <li>
       <p style="position:absolute;"></p>
-      <div>position:absolute</div>
+      <div>position:absolute(不占据空间，无法点击)</div>
     </li>
     <li>
       <p style="position: absolute;top: -999em;"></p>
       <div>
         position:absolute;
-        top: -999em
+        top: -999em;(不占据空间，无法点击)
       </div>
     </li>
     <li>
       <p style="position: relative;top: -999em;"></p>
-      <div>position:relative;
-      top:-999em</div>
+      <div>
+        position:relative;top: -999em(占据空间，无法点击)
+      </div>
     </li>
     <li>
-      <p style="height:0;overflow:hidden;"></p>
-      <div>height:0;overflow:hidden;</div>
+      <p style="height:0;visibility:hidden;"></p>
+      <div>height:0;
+      overflow:hidden;(占据空间，无法点击)</div>
     </li>
     <li>
-      <p></p>
-      <div></div>
+      <p style="position:absolute;visibility: hidden;"></p>
+      <div>position:absolute;
+      visibility: hidden;(不占据空间，无法点击)</div>
     </li>
     <li>
-      <p></p>
-      <div></div>
+      <p style="position: relative;visibility: hidden;"></p>
+      <div>position: relative;visibility: hidden;(占据空间，无法点击)</div>
     </li>
     <li>
-      <p></p>
-      <div></div>
-    </li>
-    <li>
-      <p></p>
-      <div></div>
+      <p style="opacity: 0;filter: alpha(opacity=100);"></p>
+      <div>opacity: 0;filter: alpha(opacity=100);(占据空间，可以点击)</div>
     </li>
   </ul>
 </body>
