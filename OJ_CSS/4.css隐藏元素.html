@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #AFD8BB;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    li {
+      display: flex;
+      margin-top: 10px;
+      margin-right: 50px;
+      width: 400px;
+    }
+    p {
+      margin-right: 10px;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+      width: 200px;
+      height: 200px;
+      background-color: #A67CE4;
+      cursor: pointer;
+      opacity: 0.8; 
+    }
+    p:hover {
+      transform: rotate(-7deg);
+    }
+    div {
+      display: table-cell;
+      vertical-align: middle;
+      width: 200px;
+      height: 200px;
+      color: #fff;
+      background-color: #ECD368;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>
+      <p style="display: none;"></p>
+      <div>display:none</div>
+    </li>
+    <li>
+      <p style="visibility: hidden;"></p>
+      <div>visibility:hidden</div>
+    </li>
+    <li>
+      <p style="position:absolute;"></p>
+      <div>position:absolute</div>
+    </li>
+    <li>
+      <p style="position: absolute;top: -999em;"></p>
+      <div>
+        position:absolute;
+        top: -999em
+      </div>
+    </li>
+    <li>
+      <p style="position: relative;top: -999em;"></p>
+      <div>position:relative;
+      top:-999em</div>
+    </li>
+    <li>
+      <p style="height:0;overflow:hidden;"></p>
+      <div>height:0;overflow:hidden;</div>
+    </li>
+    <li>
+      <p></p>
+      <div></div>
+    </li>
+    <li>
+      <p></p>
+      <div></div>
+    </li>
+    <li>
+      <p></p>
+      <div></div>
+    </li>
+    <li>
+      <p></p>
+      <div></div>
+    </li>
+  </ul>
+</body>
+<script type="text/javascript">
+  const oUl = document.getElementsByTagName("ul")[0];
+  const oLi = oUl.getElementsByTagName("li");
+  for(let i = 0; i < oLi.length; i++) {
+    const oP = oLi[i].getElementsByTagName("p")[0];
+    oP.onclick = function() {
+      alert('xx');
+      console.log('xx');
+    }
+  }
+</script>
+</html>

@@ -1,14 +1,9 @@
-function Person() {
-  this.name = 'a';
+function test(n) {
+  this.x = n;
+  return this;
 }
+var x = test(1);
+var y = test(2);
+console.log(x === y);  // true
+console.log(x.x, y.x); // 2 2
 
-Person.prototype = {
-  constructor: 8,
-  name: 9
-}
-
-var b = new Person();
-delete(b.name);
-
-console.log(b);
-console.log(b.contructor);
