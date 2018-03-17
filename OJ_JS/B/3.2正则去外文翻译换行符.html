@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    section {
+      margin: 0 auto;
+      width: 800px;
+    }
+    textarea {
+      resize: none;
+    }
+    button {
+      display: block;
+      width: 100px;
+      height: 40px;
+      margin: 10px auto;
+      color: #fff;
+      background-color: #A6A5DB;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .3s;
+    }
+    button:hover {
+      background-color: #EC714E;
+      transform: scale(1.5);
+      transition: all .8s;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>这一行是原来的</h1>
+    <textarea name="" id="one" cols="100" rows="18"></textarea>
+  </section>
+  <button>进行骚操作</button>
+  <section>
+    <h1>这一行是经过骚操作的</h1>
+    <textarea name="" id="two" cols="100" rows="18"></textarea>
+  </section>
+</body>
+<script type="text/javascript">
+  function addEvent(ele, type, fn) {
+    if (ele.addEventListener) {
+      ele.addEventListener(type, fn, false);
+    } else if (ele.attachEvent) {
+      ele.attachEvent('on' + type, fn);
+    }
+  }
+  const section = document.getElementsByTagName("section");
+  const pre = section[0];
+  const res = section[1];
+  const oBtn = document.getElementsByTagName("button")[0];
+  addEvent(oBtn, 'click' ,() => {
+    console.log(pre.value);
+  });
+  console.log(pre)
+</script>
+</html>
