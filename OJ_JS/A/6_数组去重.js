@@ -33,3 +33,7 @@ const unique2 = (arr) => {
 	return res;
 }
 console.log(unique2(two));
+
+// 采用 ES6 的 Set, 只要一瞬间
+const three = [8, '9', '8', 3, 9, 9, 3];
+console.log(Array.from(new Set(three)));
