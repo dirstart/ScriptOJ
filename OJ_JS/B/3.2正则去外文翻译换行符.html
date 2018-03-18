@@ -50,11 +50,12 @@
     }
   }
   const section = document.getElementsByTagName("section");
-  const pre = section[0];
-  const res = section[1];
+  let pre = section[0].getElementsByTagName("textarea")[0];
+  let res = section[1].getElementsByTagName("textarea")[0];
   const oBtn = document.getElementsByTagName("button")[0];
   addEvent(oBtn, 'click' ,() => {
     console.log(pre.value);
+    res.innerHTML = pre.value.replace(/\n/g, ' ');
   });
   console.log(pre)
 </script>
