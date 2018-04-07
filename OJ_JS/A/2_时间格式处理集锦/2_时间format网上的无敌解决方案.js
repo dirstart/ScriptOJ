@@ -14,11 +14,17 @@ const format = (value, format = "yyyy-MM-dd hh:mm:ss") => {
     (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
         // 此句为了 当我们写 'yyy' 的时候，只返回 三位
     Object.keys(o).forEach((k) => {
-        if (new RegExp(`(${k})`).test(fmt)) fmt = fmt.replace(RegExp.$1,
+        if (new RegExp(`(${k})`).test(fmt)) {
+            // 这里其实是 判断我们的 fmt 有多少东西。
+            console.log('test', k);
+            fmt = fmt.replace(RegExp.$1,
             (RegExp.$1.length === 1) ?
             (o[k]) :
             ((`00${o[k]}`).substr((`${o[k]}`).length)));
-        // 此句为了 当分钟数或者秒数或者..... 为 个位数的时候 显示 '01', '02', '08'之类的
+        }
+        // 1.此句为了 当分钟数或者秒数或者..... 为 个位数的时候 显示 '01', '02', '08'之类的
+        // 2.一般情况下，没有 "q+" 和 "S" 的匹配了。具体看 fmt 是否有东西。
+        // 3.
     });
     return fmt;
 };

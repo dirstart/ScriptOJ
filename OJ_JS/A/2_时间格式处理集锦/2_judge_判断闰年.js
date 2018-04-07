@@ -11,3 +11,5 @@ const isLeapYear = (...needles) => {
   }
 }
 isLeapYear(2004, 2000, 500);
+
+// 四年一闰，一百年不闰，四百年再闰。
