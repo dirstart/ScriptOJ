@@ -119,7 +119,7 @@ function getStyle(ele, attr) {
   if (window.getComputedStyle) {
     return window.getComputedStyle(ele, null)[attr];
   } else {
-    return element.currentStyle[attr];
+    return ele.currentStyle[attr];
   }
 }
 console.log(getStyle(oBox, "height"));
