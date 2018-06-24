@@ -21,10 +21,11 @@
 		background: green;
 	}
 	.bottomDiv {
-		width: 500px
+		width: 500px;
 		height: 500px;
 		margin:  5px 0;
 		background: yellow;
+		border: 1px solid #000;
 	}
 </style>
 </head>
@@ -33,7 +34,7 @@
 		<div class="floatDiv">
 			floatDiv
 		</div>
-		<div class="textDiv">sfsfsfsfsf</div>
+		<div class="textDiv">sfsfsfsfs主演赵宝刚导演的青春剧《奋斗》； [2]  同年，主演首部电影《走着瞧》。2008年主演滕华涛执01f</div>
 	</div>
 	<div class="bottomDiv">
 		文章，1984年6月26日出生于陕西省西安市，中国内地男演员、导演。2006年毕业于中央戏剧学院表演系。
@@ -43,4 +44,18 @@
 2017年9月16日，凭借《陆垚知马俐》获得第31届中国电影金鸡奖导演处女作奖。 [14] 
 	</div>
 </body>
+<script type="text/javascript">
+	const getStyle = (ele, attr) => {
+		if (window.getComputedStyle) {
+			return window.getComputedStyle(ele, null)[attr];
+		} else {
+			return ele.currentStyle[attr];
+		}
+	}
+
+	const topDiv = document.getElementsByClassName("topDiv")[0];
+	const floatDiv = document.getElementsByClassName("floatDiv")[0];
+	console.log("外层top", getStyle(topDiv, "height"));
+	console.log("内层top", getStyle(floatDiv, "height"));
+</script>
 </html>
