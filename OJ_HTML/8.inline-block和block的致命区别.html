@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			margin-top: 20px;
+		}
+		#box1, #box2 {
+			margin: 0 auto;
+			width: 100px;
+			height: 100px;
+		}
+		#box1 {
+			background: blue;
+		}
+		#box2 {
+			margin: 0 auto;
+			display: inline-block;
+			background: green;
+		}
+		.inner-box1 {
+			margin-top: 5px;
+			height: 10px;
+			background: #f60;
+		}
+		.inner-box2 {
+			margin-top: 5px;
+			height: 10px;
+			background: #f60;
+		}
+	</style>
+</head>
+<body>
+	<hr />
+	<div id="box1">
+		<div class="inner-box1">
+			
+		</div>
+	</div>
+	<hr />
+	<div id="box2">
+		<div class="inner-box2"></div>
+	</div>
+	<p>
+		问题已解决。
+		<ul>
+			<li>1. 内部block和外部block的边距会合并。因为外部inline-block形成了BFC，所以不会受到内部block的传递margin-top。</li>
+			<li>2. inline-block虽然支持margin，但是不支持<code> margin:auto</code> 。</li>
+		</ul>
+	</p>
+</body>
+</html>
