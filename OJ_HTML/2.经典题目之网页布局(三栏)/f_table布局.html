@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.one,
+	.two,
+	.three {
+		margin-bottom: 10px;
+	}
+
+	/*one*/
+	.one {
+		width: 100%;
+		display: table;
+	}
+	.one .left,
+	.one .main,
+	.one .right {
+		height: 100px;
+		background-color: #089e8a;
+		display: table-cell;
+	}
+	.one .left {
+		width: 300px;
+	}
+	.one .main {
+		background: yellow;
+	}
+	.one .right {
+		width: 300px;
+	}
+
+	/*two*/
+	.two .left,
+	.two .right {
+		width: 300px;
+		padding: 10px;
+		text-align: center;
+		vertical-align: middle;
+		display: table-cell;
+		border: 1px solid #08e322;
+	}
+
+	/*three*/
+	.three-wrap {
+		border-collapse: separate;
+		border-spacing: 10px;
+	}
+
+	.three {
+		display: table-row;
+	}
+
+	.three .left,
+	.three .right {
+		display: table-cell;
+		padding: 10px;
+		border: 1px solid #6ab;
+	}
+
+</style>
+<body>
+	<div class="one">
+		<div class="left"></div>
+		<div class="main">
+			<h1>1.table-cell 的主要作用是高度不同的文字都会自动对齐?</h1>
+		</div>
+		<div class="right"></div>
+	</div>
+	<div class="two">
+		<div class="left">
+			左边是这么高，右边会是多高呢。
+			2.需要注意的是 margin 元素对 table-cell 不起作用。
+			   => 我们可以通过拉动浏览器宽度看到，table-cell 的自动变化.
+			3.如果我们设置了宽度的话 => 当浏览器被挤到更小的时候，会自动缩小宽度。
+		</div>
+		<div class="right">
+			 其实我觉得大家别问元芳，元芳不是神人，<br />
+		    也不会武功，也许还是个智障，<br />
+		    我就不信我在这里黑元芳<br />
+		    他会突然飞檐走壁来到我身后<br />
+		    把我的头按在键盘上
+		</div>
+	</div>
+
+	<div class="three-wrap">
+		<div class="three">
+			<div class="left">
+				他们的 width/height 都起到了 min-width/min-height 的作用哦。
+			</div>
+			<div class="right">
+				4.既然不能用 margin，拿我们如何让 表格之间产生边框呢。 => 边框模式(separate) + border-spacing
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -13,7 +13,7 @@
   }
   #box {
     float: left;
-    width: 50%;
+    width: 33%;
     height: 100%;
     background-color: #9B66F9;
     color: #fff;
@@ -27,13 +27,29 @@
   }
   #box2 {
     float: left;
-    width: 49vw;
+    width: 33vw;
     height: 100vh;
     background-color: #C382F1;
     color: #fff;
     letter-spacing: 2px;
     text-indent: 10px;
     font-size: 20px;
+  }
+  #box3 {
+    position: relative;
+    left: 66%;
+    width: 33%;
+    height: 100%;
+    background-color: #089e8a;
+  }
+
+  #box3 #main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: yellowgreen;
   }
 </style>
 </head>
@@ -56,6 +72,11 @@
       height: 100vh;
     }
     </pre>
+  </div>
+  <div id="box3">
+    <div id="main">
+      
+    </div>
   </div>
 </body>
 </html>

@@ -9,23 +9,26 @@
     padding: 0;
   }
   div {
-    width: 200px;
+    width: 500px;
     height: 100px;
     background-color: #f0f0f0;
   }
   .out {
+    overflow: hidden;
     margin-bottom: 10px;
   }
   .in {
-    width: 100px;
+    width: 400px;
     height: 80px;
     background-color: #ABEDDA; 
   }
   .out1 {
+    /*这里的 inline-block 仅仅是为了达成BFC而用的*/
+    display: inline-block;
     margin: 0 auto;
   }
   .one {
-    margin: 0 auto; 
+    margin: 10px auto;
     line-height: 80px;
     text-align: center;
   }
@@ -45,7 +48,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -50px;
+    margin-left: -200px;
     margin-top: -40px;
   }
   .out4 {
@@ -79,23 +82,24 @@
   }
 </style>
 <body>
+  <h1>以下是否需要高度可直接通过修改内 .in 类高度来确认。</h1>
   <div class="out out1">
-    <div class="in one">不需要知道高度</div>
+    <div class="in one">1.margin: 10px auto - 需要知道高度</div>
   </div>
   <div class="out out2">
-    <div class="in two">不需要知道高度</div>
+    <div class="in two">2.利用absolute 和 translate(-50%, -50%) - 不需要知道高度</div>
   </div>
   <div class="out out3">
-    <div class="in three">需要知道高度</div>
+    <div class="in three">3.利用absolute 和 负margin值  - 需要知道高度</div>
   </div>
   <div class="out out4">
-    <div class="in four ">不需要知道高度</div>
+    <div class="in four ">4.flex牛逼！！！ - 不需要知道高度</div>
   </div>
   <div class="out out5">
-    <div class="in five ">不需要知道高度</div>
+    <div class="in five ">5.利用 margin: auto + top/left/right/bottom => 0, absolute 不需要知道高度</div>
   </div>
   <div class="out out6">
-    <div class="in six ">不需要知道高度</div>
+    <div class="in six ">6.table布局，不需要知道高度</div>
   </div>
 </body>
 </html>
