@@ -1,0 +1,1 @@
+console.log("aoteman".split("?")[0]);

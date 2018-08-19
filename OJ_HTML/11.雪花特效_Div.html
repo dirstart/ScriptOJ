@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>mySnow- oH!!!Sexy!</title>
+  <style type="text/css">
+    body,
+    div {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000;
+    }
+
+    #curtain {
+      width: 100%;
+      height: 600px;
+      background-color: #111123;
+    }
+
+    .snow {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      animation: mysnow 10s;
+    }
+
+    @keyframes mysnow {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .empty {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="curtain"></div>
+</body>
+<script type="text/javascript">
+(function () {
+  var $ = function (id) { return typeof id === "string" ? document.getElementById(id) : id };
+  var curtain = $("curtain");
+  var maxWidth = curtain.clientWidth - 50;
+  var maxHeight = curtain.clientHeight;
+
+  var snowControl = function () {};
+
+  snowControl.prototype = {
+    Obj: [],
+    maxCount: 10,
+    count: 0,
+    Prepare: function () {
+      for (var i = 0; i < this.maxCount; i++) {
+        var o = {
+          positionX: Math.ceil(Math.random() * maxWidth),
+          positionY: Math.ceil(Math.random() * 50),
+          speed: Math.ceil(Math.random() * 5 + 3),
+          shake: Math.ceil(Math.random() * 3)
+        };
+        this.Obj.push(o);
+      };
+    },
+    Init: function () {
+      if (this.Obj.length) {
+        var oDiv = document.createElement("div");
+        oDiv.className = "snow";
+        var now = this.Obj.shift();
+        oDiv.style.top = now.positionY + "px";
+        oDiv.style.left = now.positionX + "px";
+        curtain.appendChild(oDiv);
+        // 唤醒 div
+        this.Move(oDiv, now);
+        ++this.count;
+      } else {
+        return false;
+      }
+    },
+    Move: function (oDiv, now) {
+      var timer = setInterval(function () {
+        if (now.positionX < maxWidth && now.positionY < maxHeight - 50) {
+          now.positionY = now.positionY + now.speed;
+          now.positionX = now.positionX + now.shake;
+          oDiv.style.top = now.positionY + "px";
+          oDiv.style.left = now.positionX + "px";
+        } else {
+          now.positionX = Math.ceil(Math.random() * maxWidth);
+          now.positionY = Math.ceil(Math.random() * 50);
+          console.log(now.positionX, now.positionY);
+          oDiv.style.left = now.positionX + "px";
+          oDiv.style.top = 0 + "px";
+        }
+      }, 30);
+    },
+
+    Letsgo: function () {
+      var oThis = this;
+      var gotimer = setInterval(function () {
+        if (oThis.count == oThis.maxCount) {
+          clearInterval(gotimer);
+        } else {
+          oThis.Init();
+        }
+      }, 400);
+    }
+
+  };
+
+  var snow = new snowControl();
+  snow.Prepare();
+  snow.Letsgo();
+})();
+
+</script>
+
+</html>
