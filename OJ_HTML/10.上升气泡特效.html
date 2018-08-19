@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +11,109 @@
       margin: 0;
       padding: 0;
     }
+
     #blogTitle {
       width: 100%;
-      height: 200px;
+      height: 300px;
       background-color: #000;
     }
+
   </style>
 </head>
 <body>
   <div id="blogTitle">
-
+    <canvas id="bubbleCanvas">
+      您的浏览器不支持 Canvas 动画.
+    </canvas>
   </div>
 </body>
 <script>
-  
+(function () {
+  const $ = (id) => typeof id === "string" ? document.getElementById(id) : null;
+
+  const Box = function () {};
+  const Particle = function () {};
+
+  Box.prototype = {
+    pool: [],
+    ctx: null,
+    width: 300,
+    height: 150,
+    init: function (canvasId, wrapId) {
+      const canvas = $(canvasId);
+      const wrap = $(wrapId);
+      if (!canvas || !wrapId) {
+        return;
+      }
+
+      this.ctx = canvas.getContext('2d');
+      this.width = wrap.offsetWidth > 300 ? wrap.offsetWidth : 300;
+      this.height = wrap.offsetHeight > 150 ? wrap.offsetHeight : 150;
+      canvas.width = this.width;
+      canvas.height = this.height;
+      
+      for (let x = 0; x < this.width * 0.1; x++) {
+        var c = new Particle();
+        this.pool.push(c);
+      }
+
+      this.animate();
+      // 需要重复调用 this.animate 自身 => 
+      // 因为 arguments.callee 是个很昂贵的操作(它是个庞大的对象)，现在不推荐使用它
+      setInterval(() => console.log('test'), 1000);
+    },
+    animate: function () {
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      for (let i = 0; i < this.pool.length; i++) {
+        this.pool[i].init(this.ctx, this.width, this.height);
+      }
+    }
+  };
+
+  Particle.prototype = {
+    haveInit: false,
+    ctx: null,
+    width: 300,
+    height: 150,
+    positionX: 0,
+    positionY: 0,
+    alpha: 0,
+    scale: 0,
+    velocity: 0,
+    init: function (ctx, width, height) {
+      // 初始效果
+      if (!this.haveInit) {
+        this.haveInit = true;
+        this.ctx = ctx;
+        this.width = width;
+        this.height = height;
+        this.positionX = Math.random() * this.width;
+        this.positionY = 10 + Math.random() * this.height;
+        this.alpha = 0.1 + Math.random() * 0.3;
+        this.scale = 0.1 + Math.random() * 0.3;
+        this.velocity = Math.random();
+        return;
+      }
+
+      // 变化 => 重置
+      if(this.alpha <= 0) {
+        this.init(ctx, width, height);
+      }
+
+      // 变化效果
+      this.positionY -= this.velocity;
+      this.alpha -= 0.0005;
+      ctx.beginPath();
+      ctx.arc(this.positionX, this.positionY, this.scale * 10, 0, 2 * Math.PI, false);
+      ctx.fillStyle = 'rgba(255,255,255,' + this.alpha + ')';
+      ctx.fill();
+    }
+  }
+
+  let box = new Box();
+  box.init("bubbleCanvas", "blogTitle");
+
+}());
 </script>
+
 </html>
