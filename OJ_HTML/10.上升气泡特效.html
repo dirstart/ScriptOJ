@@ -58,15 +58,31 @@
       }
 
       this.animate();
-      // 需要重复调用 this.animate 自身 => 
-      // 因为 arguments.callee 是个很昂贵的操作(它是个庞大的对象)，现在不推荐使用它
-      setInterval(() => console.log('test'), 1000);
+      
+      // 兼容性返回我们需要的定时器 - 万里寻它千百度
+
+
+      // window.bestMethod = (function () {
+      //   return function (callback) {
+
+      //   }
+      // })(this.animate.bind(this));
+      
     },
     animate: function () {
       this.ctx.clearRect(0, 0, this.width, this.height);
       for (let i = 0; i < this.pool.length; i++) {
         this.pool[i].init(this.ctx, this.width, this.height);
       }
+
+      window.requestAFrame = (function () {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame 
+          || window.mozRequestAnimationFrame || window.oRequestAnimationFrame
+          || window.msRequestAnimationFrame || function (callback) {
+            return window.setTimeout(callback, 1000 / 60);
+          };
+      })();
+      window.requestAnimationFrame(this.animate.bind(this));
     }
   };
 
@@ -88,7 +104,7 @@
         this.width = width;
         this.height = height;
         this.positionX = Math.random() * this.width;
-        this.positionY = 10 + Math.random() * this.height;
+        this.positionY = this.height + Math.random() * 100;
         this.alpha = 0.1 + Math.random() * 0.3;
         this.scale = 0.1 + Math.random() * 0.3;
         this.velocity = Math.random();
@@ -97,9 +113,10 @@
 
       // 变化 => 重置
       if(this.alpha <= 0) {
+        this.haveInit = false;
         this.init(ctx, width, height);
       }
-
+      
       // 变化效果
       this.positionY -= this.velocity;
       this.alpha -= 0.0005;
