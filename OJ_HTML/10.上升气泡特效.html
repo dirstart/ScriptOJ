@@ -13,6 +13,7 @@
     }
 
     #blogTitle {
+      position: relative;
       width: 100%;
       height: 300px;
       background-color: #000;
@@ -39,7 +40,9 @@
     ctx: null,
     width: 300,
     height: 150,
+    timer: 0,
     init: function (canvasId, wrapId) {
+      this.wrapId = wrapId;
       let canvas = $(canvasId);
       const wrap = $(wrapId);
       if (!wrapId) {
@@ -50,6 +53,7 @@
         const o = document.createElement("canvas");
         o.setAttribute("id", "bubbleCanvas");
         o.style="width: 100%;height:100%;position: absolute;top: 0;left: 0;";
+        o.innerHTML = "您的浏览器不支持 Canvas 动画.";
         wrap.appendChild(o);
         canvas = o;
       }
@@ -72,7 +76,10 @@
       for (let i = 0; i < this.pool.length; i++) {
         this.pool[i].init(this.ctx, this.width, this.height);
       }
-
+      /**
+       *  使用 requestAnimationFrame的好处，一旦页面不处于浏览器的当前标签，就会自动停止刷新。这就节省了CPU、GPU和电力。
+       *  下面的其实是该功能的一个 polyfill.
+      **/
       window.requestAFrame = (function () {
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame 
           || window.mozRequestAnimationFrame || window.oRequestAnimationFrame
@@ -80,7 +87,14 @@
             return window.setTimeout(callback, 1000 / 60);
           };
       })();
-      window.requestAnimationFrame(this.animate.bind(this));
+      this.timer = window.requestAFrame(this.animate.bind(this));
+      console.log(this.timer);
+      // window.cancelAnimationFrame(this.timer);
+    },
+    resize: function (id) {
+      if (this.timer) {
+        window.cancelAnimationFrame(this.timer);
+      }
     }
   };
 
@@ -127,6 +141,14 @@
 
   let box = new Box();
   box.init("bubbleCanvas", "blogTitle");
+
+  // 销毁重建 => 光销毁 box 是不行的，还要销毁粒子效果的 粒子们。
+  window.onresize = function () {
+    // box.resize("blogTitle");
+    box.resize();
+    box.pool = [];
+    box.init("bubbleCanvas", "blogTitle");
+  }
 
 }());
 </script>
