@@ -1,0 +1,349 @@
+body, p, ul, li, div {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul, li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  /*
+  	移动端样式
+  */
+
+  /*
+  	覆盖掉原来的样式
+  */
+  @media only screen and (max-width: 767px) {
+  	#blogTitle h1 {
+  		padding-top: 25px !important;
+  	}
+    #blogTitle h2 {
+      margin: 0 .5rem;
+    }
+    #navigator {
+      position: absolute !important;
+      top: 0 !important;  
+      left: 0 !important;
+      width: 100% !important;
+    }
+
+    #main {
+      padding: 0 1rem;
+    }
+
+    #navigator ul {
+      width: 100% !important;
+      display: flex;
+    }
+    
+    #navigator ul li:nth-child(3),
+    #navigator ul li:nth-child(5) {
+      display: none !important;
+    }
+    
+
+    #navigator ul li {
+      box-shadow: 0 0 10px;
+    }
+    #navigator ul li a {
+      color: #936d29 !important;
+      background-color: #191912 !important;
+    }
+
+    #mainContent .forFlow {
+      width: -webkit-fill-available !important;
+    }
+
+    .day .postDesc {
+      display: none;
+    }
+
+    #sidebar_search #sidebar_search_box {
+      display: none;
+    }
+  }
+
+  /*
+  	PC端样式
+  */
+
+  /* Header => 标题栏、导航栏 */
+  #header {
+    position: relative;
+  }
+
+  /* 标题栏 */
+  #blogTitle {
+  	width: 100%;
+    min-height: 13rem;
+  	text-align: center;
+    background-color: #191912;
+    background-position: center top;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  }
+
+  #blogTitle h1 {
+    margin-top: 0;
+  }
+
+  #Header1_HeaderTitle {
+    text-decoration: none;
+    color: #000;
+    text-shadow: 0 0 10px #ffb66f;
+    font-size: 1.5rem;
+  }
+
+  #blogTitle h2 {
+    margin-bottom: 2rem;
+    display: inline-block;
+    width: 60%;
+    padding: 1rem;
+    font-size: 1rem;
+    text-align: left;
+    text-indent: 2rem;
+    color: #fff;
+    font-weight: 100;
+    text-shadow: 0 0 32px #ffc730;
+    box-shadow: 0 0 10px #ffd26a;
+  }
+
+  /* 导航栏 */
+  #navigator {
+    position: fixed;
+    top: 2rem;
+    right: 0;
+    width: 6rem;
+  }
+
+  .blogStats {
+    display: none;
+  }
+
+  #navList li {
+    padding-left: 1rem;
+    margin-top: .3rem;
+    display: inline-block;
+    width: 5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    transition: all .5s ease;
+  }
+  
+  #navList li:hover {
+    width: 6rem;
+    padding-left: 0;
+  }
+  #navList li:hover a {
+    background: #089e8a;
+    color: #fff;
+  }
+
+  #navList li a {
+    display: inline-block;
+    width: 100%;
+    border-radius: 1rem 0 0 1rem;
+    color: #e4d3c8;
+    background: #121919;
+  }
+
+  /* 主要内容 */
+  #main {
+  }
+
+  #mainContent {  
+    text-align: center;
+  }
+
+  #mainContent .forFlow {
+    display: inline-block;
+    padding-top: 1rem;
+    width: 80%;
+    text-align: left;
+  }
+
+  #main .dayTitle {
+    display: none;
+  }
+
+  #main .postCon {
+    position: relative;
+    margin-bottom: .8rem;
+  }
+
+  #main .forFlow .postCon .c_b_p_desc {
+    width: 100%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #main .forFlow .postCon .c_b_p_desc a {
+    display: none;
+    /* position: absolute;
+    width: 10%;
+    top: 0;
+    right: 0;; */
+  }
+
+  /* #main .forFlow .day .clear {
+    margin-bottom: 2rem;
+  } */
+
+  #main .forFlow .postTitle {
+    position: relative;
+    margin-bottom: .5rem;
+    padding-left: 1rem;
+  }
+
+  #main .forFlow .postTitle a {
+    display: inline-block;
+    width: 100%;
+    background: #b4b19b;
+    border-radius: 3px;
+    text-indent: 2rem;
+  }
+
+  #main .forFlow .postTitle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #089e8a;
+    width: 5px;
+    height: 100%;
+  }
+
+  #main .forFlow .postTitle a {
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1rem;
+    color: #191919;
+  }
+
+  #main .forFlow .postDesc {
+    margin-bottom: 2rem;
+    float: right;
+    font-size: .9rem;
+  }
+
+  #main .forFlow .postDesc a {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    background: #089e8a;
+  }
+
+  #main .forFlow .postDesc a:hover {
+    background: #0066cc;
+    color: #eee;
+    box-shadow: 0 0 10px #000;
+  }
+
+  /*评论栏目*/
+  #comment_form_container {
+      margin-top: 2rem;
+      background: #1c7096;
+      text-align: center;
+      border-radius: .5rem;
+  }
+
+  #commentform_title {
+    background-image: none;
+    width: 200px;
+    font-size: 2rem;
+    text-indent: 2rem;
+    color: #fff;
+    text-align: left;
+  }
+
+  .commentbox_title_left {
+    display: none;
+  }
+
+  #tbCommentBody {
+    width: 88%;
+    border-radius: 6px;
+    background: #619dd9;
+    border: none;
+    resize: none;
+    text-indent: 2em;
+    color: #452216;
+    font-size: 1.4rem;
+    text-shadow: 0 0 10px #2e6ab1;
+  }
+
+  #tbCommentBody:focus,
+  #tbCommentBody:hover {
+    background-color: #fff8cd;
+  }
+
+  /*JS canvas 动画*/
+  #bubbleCanvas {
+    position: fixed;
+    left: 10%;
+    width: 80%;
+  }
+
+
+  /*搜索栏*/
+
+
+  #sideBar .newsItem {
+    display: none;
+  }
+
+  #sideBar #blog-calendar {
+    display: none !important;
+  }
+
+  #sidebar_search .catListTitle {
+    display: none;
+  }
+
+  #sidebar_search #sidebar_search_box {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+  }
+
+  #sidebar_search #sidebar_search_box #q {
+    border: none;
+    background: #3e3e4a;
+    color: #fff;
+    transition: all .5s ease;
+  }
+
+  #sidebar_search #sidebar_search_box input#q:focus,
+  #sidebar_search #sidebar_search_box input#q:hover {
+    background-color: #089e8a;
+  }
+
+  #sidebar_search #sidebar_search_box input#q:hover {
+    width: 15rem;
+    text-indent: 2rem;
+    height: 3rem;
+  }
+
+  #sidebar_search #sidebar_search_box #btnZzk {
+    border: none;
+    border-radius: 3px;
+    background: #2196F3;
+    vertical-align: top;
+  }
+
+  #sidebar_search #sidebar_search_box #btnZzk:hover {
+    background: #089e8a;
+    color: #fff;
+    cursor: pointer;
+  }

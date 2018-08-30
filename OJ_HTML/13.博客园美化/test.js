@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    #blogTitle {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      background-color: #000;
-    }
-
-  </style>
-</head>
-<body>
-  <div id="blogTitle">
-    <!-- <canvas id="bubbleCanvas">
-      您的浏览器不支持 Canvas 动画.
-    </canvas> -->
-  </div>
-</body>
 <script>
 (function () {
   const $ = (id) => typeof id === "string" ? document.getElementById(id) : null;
@@ -149,5 +119,3 @@
 
 }());
 </script>
-
-</html>
