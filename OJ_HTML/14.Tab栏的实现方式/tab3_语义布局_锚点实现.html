@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body,p,div{margin: 0;}
+    h2{margin: 0;font-size:100%;}
+    ul{margin: 0;padding: 0;list-style: none;}   
+    a{text-decoration: none;color:inherit;}
+    
+    ul {
+      position: relative;
+      margin: 0 auto;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      font-size: 0;
+    }
+
+    li {
+      width: 33.3%;
+      display: inline-block;
+      font-size: 12px;
+    }
+    .header-item {
+      display: inline-block;
+      width: 100%;
+      line-height: 30px;
+      height: 30px;
+      background: #089e8a;
+      border-right: 1px solid #fff;
+      text-align: center;
+      text-shadow: 0 0 10px #000;
+    }
+    .header-item:hover {
+      background: #6c8;
+    }
+    .content-item {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 600px;
+      height: 370px;
+      background: #6c9;
+    }
+    .current {
+      z-index: 1;
+    }
+    .content-item:target {
+      z-index: 1;
+    }
+    .content-item:target ~ .header-item {
+      background: #6c9;
+    }
+    body {
+      height: 1200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>语义布局，一个tab包括一个标题和一个内容块。为了高亮标题，我们将标题放在内容块(也是锚点所在元素))下方。</h1>
+  <h1>所以缺点2不存在了。</h1>
+  <h3>缺点1：和视觉布局一样，显然当页面一长，跳到的锚点的地方已经把tab-nav遮住了。 => 页面跳动问题需要解决。</h3>
+  <p> => 用 position: fixed; 可以解决，但显然不是什么好办法.锚点本身实现的限制，所以很难完美地解决。</p>
+  <h3 style="text-decoration: line-through;">缺点2：header没有高亮。</h3>
+  <ul>
+    <li>
+      <p id="tab1" class="content-item current">content1</p>
+      <a class="header-item" href="#tab1">Tab1</a>
+    </li>
+    <li>
+      <p id="tab2" class="content-item">content2</p>
+      <a class="header-item" href="#tab2">Tab2</a>
+    </li>
+    <li>
+      <p id="tab3" class="content-item">content3</p>
+      <a class="header-item" href="#tab3">Tab3</a>
+    </li>
+  </ul>
+</body>
+</html>

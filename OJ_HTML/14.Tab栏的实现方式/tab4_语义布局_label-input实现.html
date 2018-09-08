@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body,p,div{margin: 0;}
+    h2{margin: 0;font-size:100%;}
+    ul{margin: 0;padding: 0;list-style: none;}   
+    a{text-decoration: none;color:inherit;}
+    
+    ul {
+      margin: 0 auto;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      font-size: 0;
+    }
+
+    li {
+      width: 33.3%;
+      display: inline-block;
+      font-size: 12px;
+    }
+    .header-anchor {
+      display: none;
+    }
+    .header-item {
+      display: inline-block;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      background: #089e8a;
+      text-align: center;
+      border-right: 1px solid #6c9;
+      cursor: pointer;
+    }
+    .header-item:hover {
+      color: #fff;
+    }
+    .content-item {
+      position: relative;
+      width: 600px;
+      height: 370px;
+      background: #6c9;
+      text-indent: 2em;
+    }
+    .item2 {
+      margin-left: -100%;
+    }
+    .item3 {
+      margin-left: -200%;
+    }
+    body {
+      height: 1200px;
+    }
+    .header-anchor:checked ~ .header-item {
+      background: #6c9;
+    }
+    .header-anchor:checked ~ .content-item {
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>语义+锚点。</h1>
+  <ul>
+    <li>
+      <input class="header-anchor" name="nav" type="radio" id="tab1" checked>
+      <label class="header-item" for="tab1">Tab One</label>   
+      <p class="content-item current">content1</p>
+    </li>
+    <li>
+      <input class="header-anchor" name="nav" type="radio" id="tab2" checked>
+      <label class="header-item" for="tab2">Tab Two</label>   
+      <p class="content-item item2">content2</p>
+    </li>
+    <li>
+      <input class="header-anchor" name="nav" type="radio" id="tab3" checked>
+      <label class="header-item" for="tab3">Tab Three</label>
+      <p class="content-item item3">content3</p>
+    </li>
+  </ul>
+</body>
+</html>
