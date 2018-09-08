@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body,p,div{margin: 0;}
+    h2{margin: 0;font-size:100%;}
+    ul{margin: 0;padding: 0;list-style: none;}   
+    a{text-decoration: none;color:inherit;}
+
+    .tab-header,
+    .tab-content {
+      margin: 0 auto;
+    }
+    .tab-header {
+      width: 600px;
+      height: 30px;
+      border: 1px solid #6c9;
+      background-color: #089e8a;
+      font-size: 0;
+      text-shadow: 0 0 10px #000;
+      cursor: pointer;
+    }
+    .tab-content {
+      width: 600px;
+      height: 400px;
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+    .header-item {
+      display: inline-block;
+      width: 33%;
+      font-size: 16px;
+      line-height: 30px;
+      text-align: center;
+    }
+    .header-item:hover {
+      color: #fff;
+    }
+    .header-item:target {
+      background: #6c9;
+    }
+    .content-item {
+      width: 100%;
+      height: 100%;
+      text-indent: 2em;
+      background-color: #6c9;
+    }
+    
+    .tab-content {
+      /* position: fixed; */
+    }
+  </style>
+</head>
+<body>
+  <h1>视觉布局，看起来，tab的标题和tab的内容应该是分开的。</h1>
+  <h1>显然当页面一长，跳到的锚点的地方已经把tab-nav遮住了。</h1>
+  <nav class="tab-header" id="test">
+    <a href="#tab1" class="header-item">Tab1</a>
+    <a href="#tab2" class="header-item">Tab2</a>
+    <a href="#tab3" class="header-item">Tab3</a>
+  </nav>
+  <ul class="tab-content">
+    <li class="content-item" id="tab1">content1</li>
+    <li class="content-item" id="tab2">content2</li>
+    <li class="content-item" id="tab3">content3</li>
+  </ul>
+</body>
+</html>

@@ -23,3 +23,5 @@ const strFormat = (str, ...rest) => {
 
 let string1 = "今天看了一部动画，叫做{0}，我感觉{1}. ";
 strFormat(string1, "碧蓝之海", "非常不错");
+
+strFormat("听说{0}，也很{1},顺序{3}, {2}", "刃牙", "好看", "111", "222");

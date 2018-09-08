@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body,p{margin: 0;}
+    h2{margin: 0;font-size:100%;}
+    ul{margin: 0;padding: 0;list-style: none;}   
+    a{text-decoration: none;color:inherit;}
+
+    ul {
+      margin: 0 auto;
+      width: 630px;
+      height: 600px;
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    li {
+      width: 33.3%;
+      height: 100%;
+      background-color: #089e8a;
+      float: left;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    span {
+      display: inline-block;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      cursor: pointer;
+      border: 1px solid #19cfff;
+    }
+    span:hover {
+      color: #fff;
+    }
+    p {
+      width: 630px;
+      height: calc(100% - 40px);
+      background-color: #69c;
+      text-align: left;
+    }
+    li:nth-child(2) p {
+      margin-left: -100%;
+    }
+    li:nth-child(3) p {
+      margin-left: -200%;
+    }
+
+    li.current {
+      /* z-index只能在position属性值为relative或absolute或fixed的元素上有效。 */
+      position: relative;
+      z-index: 1;
+    }
+
+    li:hover {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>语义布局，从我们的印象中来看，每一个Tab的头部和内容，都是一个整体。</h1>
+  <ul>
+    <li class="current">
+      <span>link-one</span>
+      <p>content-one</p>
+    </li>
+    <li>
+      <span>link-two</span>
+      <p>content-two</p>
+    </li>
+    <li>
+      <span>link-three</span>
+      <p>content-three</p>
+    </li>
+  </ul>
+</body>
+</html>

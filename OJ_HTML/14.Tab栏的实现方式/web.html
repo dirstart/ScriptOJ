@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+    body,p{margin: 0;}
+    ul{margin: 0;padding: 0;list-style: none;}
+    a{text-decoration: none;color: inherit;}
+    .box{width:572px;border:1px solid #999;font:14px "微软雅黑";overflow:hidden;}
+    .nav-tit{margin-left: -1px;height: 40px;line-height: 40px;text-align: center;background-color: #f1f1f1;overflow: hidden;}
+    .nav-titI{box-sizing: border-box;float: left;width: 33.333%;border-left: 1px solid #cecece;border-bottom: 1px solid #cecece;cursor: pointer;}
+    .nav-txt{height: 200px;text-indent: 2em; line-height: 2;}
+    .nav-txtI{height: 200px;}
+    /*重点内容*/
+    .nav-txt{overflow: hidden;}
+    .nav-titI:hover{background-color: white;border-bottom: none;}
+    body {
+      height: 1100px;
+    }
+    </style>
+    
+    <div class="box">
+        <nav class="nav-tit">
+            <a class="nav-titI" href="#kc">课程</a>
+            <a class="nav-titI" href="#xx">学习计划</a>
+            <a class="nav-titI" href="#jn">技能图谱</a>
+        </nav>
+        <ul class="nav-txt">
+            <li class="nav-txtI nav-txtI_active" id="kc">课程内容</li>
+            <li class="nav-txtI" id="xx">学习计划内容</li>
+            <li class="nav-txtI" id="jn">技能图谱内容</li>
+        </ul>
+    </div>
+</html>
