@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=s, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    h2 {
+      cursor: pointer;
+    }
+    #tabGroup li {
+      display: none;
+    }
+    #tabGroup .current {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav id="navGroup">
+    <h2>tab1</h2>
+    <h2>tab2</h2>
+    <h2>tab3</h2>
+  </nav>
+  <ul id="tabGroup">
+    <li class="current">content1</li>
+    <li>content2</li>
+    <li>content3</li>
+  </ul>
+</body>
+<script>
+  const navGroup = document.getElementById("navGroup").getElementsByTagName("h2");
+  const tabGroup = document.getElementById("tabGroup").getElementsByTagName("li");
+  for (let i = 0; i < navGroup.length; i++) {
+    navGroup[i].onclick = function () {
+      for (let k = 0; k < tabGroup.length; k++) {
+        tabGroup[k].style.display = "none";
+      }
+      tabGroup[i].style.display = "block";
+    }
+  }
+</script>
+</html>

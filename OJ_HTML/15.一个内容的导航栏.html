@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <style>
+    p {
+      height: 300px;
+      background: #089e8a;
+      margin-bottom: 100px;
+    }
+    .nav {
+      position: fixed;
+      /* width:  */
+      width: 60px;
+      height: 22px;
+      overflow: hidden;
+      bottom: 200px;
+      right: 0;
+    }
+    .nav:hover {
+      overflow: visible;
+    }
+    .nav a {
+      display: block;
+      width: 60px;
+      height: 20px;
+      border: 1px solid #6c9;
+      color: #000;
+      text-align: center;
+      text-decoration: none;
+    }
+    .nav a:hover {
+      background: #089e8a;
+      color: #fff;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <h1>当内容过长，我们有时候就需要悬浮着的固定着的导航栏.</h1>
+  <p id="test1">1</p>
+  <p id="test2">2</p>
+  <p id="test3">3</p>
+  <p id="test4">4</p>
+  <div class="nav">
+    <a href="#test1">1</a>
+    <a href="#test2">2</a>
+    <a href="#test3">3</a>
+    <a href="#test4">4</a>
+  </div>
+</body>
+<script>
+  $(document).ready(function () {
+    $("a").click(function (e) {
+      e.preventDefault();
+      $("html, body").animate({
+        scrollTop: $($(this).attr("href")).offset().top + "px"
+      }, {
+        duration: 500,
+        easing: "swing"
+      });
+    })
+
+    $(".nav").click(function () {
+      $(this).css('overflow') === 'visible' ? $(this).css('overflow', 'hidden') : $(this).css('overflow', 'visible');
+    });
+  });
+</script>
+</html>

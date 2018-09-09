@@ -63,7 +63,8 @@ body, p, ul, li, div {
       display: none;
     }
 
-    #sidebar_search #sidebar_search_box {
+    #sidebar_search #sidebar_search_box,
+    #main .forFlow .postDesc #post_comment_count + a {
       display: none;
     }
   }
@@ -312,14 +313,18 @@ body, p, ul, li, div {
   }
 
   #sidebar_search #sidebar_search_box {
-    position: absolute;
+    position: fixed;
     top: 0;
-    right: 1rem;
+    right: 6px;
   }
 
   #sidebar_search #sidebar_search_box #q {
+    width: 1rem;
+    height: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0 0 10px #089e8a;
+    background-color: #6c9;
     border: none;
-    background: #3e3e4a;
     color: #fff;
     transition: all .5s ease;
   }
@@ -330,20 +335,31 @@ body, p, ul, li, div {
   }
 
   #sidebar_search #sidebar_search_box input#q:hover {
-    width: 15rem;
-    text-indent: 2rem;
-    height: 3rem;
+    width: 8rem;
+    text-indent: 1rem;
+    height: 22px;
+    line-height: 22px;
   }
 
   #sidebar_search #sidebar_search_box #btnZzk {
-    border: none;
     border-radius: 3px;
-    background: #2196F3;
+    background: #fff;
+    color: #300808;
+    border: none;
     vertical-align: top;
+    letter-spacing: 2px;
   }
 
   #sidebar_search #sidebar_search_box #btnZzk:hover {
-    background: #089e8a;
+    /* background: #089e8a; */
+    background: #6c9;
     color: #fff;
     cursor: pointer;
+  }
+
+  /* 让编辑按钮置顶 */
+  #main .forFlow .postDesc #post_comment_count + a {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
