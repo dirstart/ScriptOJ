@@ -1,119 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    #blogTitle {
-      width: 500px;
-      height: 200px;
-      /* background-color: #000; */
-      border: 1px solid #089e8a;
-      resize: both;
-      overflow: auto;
-    }
-  </style>
 </head>
-
 <body>
-  <div id="blogTitle">
-    <canvas id="bubbleCanvas"></canvas>
-  </div>
+  <div>123</div>
 </body>
 <script>
-  (function () {
-    const $ = (id) => typeof id === "string" ? document.getElementById(id) : "id";
-    var width, height, canvas, ctx, circles;
-    function initHeader() {
-      try {
-        canvas = document.getElementById('bubbleCanvas');
-        if ($("bubbleCanvas")) {
-          width = window.innerWidth * 0.25 > 300 ? window.innerWidth * 0.25 : 300;
-          height = window.innerHeight;
-          canvas.width = width;
-          canvas.height = height;
-          ctx = canvas.getContext('2d');
-          circles = [];
-          for (var x = 0; x < width * 0.5; x++) {
-            var c = new Circle();
-            circles.push(c);
-          }
-          animate();
-        }
-      } catch (ex) { if (window.cosole && window.cosole.log) { cosole.log(ex) } }
-    }
-    function addListeners() {
-      try {
-        if ($("bubbleCanvas")) {
-          window.addEventListener('resize', resize);
-        }
-      } catch (ex) { if (window.cosole && window.cosole.log) { cosole.log(ex) } }
-    }
-    function resize() {
-      width = window.innerWidth * 0.25 > 300 ? window.innerWidth * 0.25 : 300;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      for (var i in circles) {
-        circles[i].draw();
-      }
-      window.requestAFrame = (function () {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-          function (callback) {
-            return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
-          };
-      })();
-      requestAFrame(animate);
-    }
-
-    // Canvas manipulation
-    function Circle() {
-      var _this = this;
-
-      // constructor
-      (function () {
-        _this.pos = {};
-        init();
-      })();
-
-      function init() {
-        _this.pos.x = Math.random() * width;
-        _this.pos.y = height + Math.random() * 100;
-        _this.alpha = 0.1 + Math.random() * 0.3;
-        _this.scale = 0.1 + Math.random() * 0.3;
-        _this.velocity = Math.random();
-      }
-
-      this.draw = function () {
-        if (_this.alpha <= 0) {
-          init();
-        }
-        _this.pos.y -= _this.velocity;
-        _this.alpha -= 0.0005;
-        ctx.beginPath();
-        ctx.arc(_this.pos.x, _this.pos.y, _this.scale * 10, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'rgba(255,255,255,' + _this.alpha + ')';
-        ctx.fill();
-      };
-    }
-
-    // $("blogTitle").append("<canvas id=\"bubbleCanvas\" width=\"300\" height=\"563\"></canvas>");
-
-    initHeader();
-    addListeners();
-  }());
 </script>
-
 </html>

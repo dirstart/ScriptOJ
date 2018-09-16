@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <embed src="./leaf.svg" width="100px" height="100px" />
+  <img src="./leaf.png" width="100px" height="100px" alt=""> -->
+</body>
+<script>
+  window.onload = function () {
+    let navigatorType = navigator.userAgent;
+    const isEdge = navigatorType.indexOf('Edge');
+    let oEmbed = document.createElement("embed");
+    let oImg = document.createElement("img");
+    oEmbed.setAttribute("src", "./leaf.svg");
+    oEmbed.setAttribute("width", "140px");
+    oEmbed.setAttribute("height", "140px");
+    oImg.setAttribute("src", "./leaf.png");
+    oImg.setAttribute("width", "140px");
+    oImg.setAttribute("height", "140px");
+    if (isEdge > -1) {
+      console.log('isEdge');
+      document.body.appendChild(oEmbed);
+    } else {
+      console.log('isChrome');
+      document.body.appendChild(oImg);
+    }
+  }
+</script>
+</html>
