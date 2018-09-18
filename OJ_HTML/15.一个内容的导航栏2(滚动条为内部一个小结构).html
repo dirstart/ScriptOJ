@@ -19,6 +19,7 @@
     }
 
     hgroup {
+      position: relative;
       border: 10px solid #382832;
       margin: 0 auto;
       width: 600px;
@@ -63,6 +64,11 @@
       1.可以考虑用 offsetHeight
       2.可以考虑用兼容性的 getComputedStyle 方法
   </pre>
+  <code>
+    PS: 快一点了，没时间优化了，先实现。
+    关键解法
+      1.使用 JQuery 的 position()  => 条件是父级要是 relative.
+  </code>
   <hgroup>
     <p id="test1">1</p>
     <p id="test2">2</p>
@@ -78,23 +84,11 @@
 </body>
 <script>
   $(document).ready(function () {
-    $("a").click(function (e) {
-      e.preventDefault();
-      $("html, body").animate({
-        scrollTop: $($(this).attr("href")).offset().top + "px"
-      }, {
-          duration: 500,
-          easing: "swing"
-        });
-    })
-
-    $(".nav").click(function () {
-      $(this).css('overflow') === 'visible' ? $(this).css('overflow', 'hidden') : $(this).css('overflow', 'visible');
-    });
-
     let winHeight = 0;
+    // 第一次进入默认渲染
     autoHeight();
-
+    computeAnchor();
+    // 根据作用域提升下方会预渲染
     function autoHeight() {
       if (window.innerHeight) {
         winHeight = window.innerHeight;
@@ -109,8 +103,40 @@
       }
       document.body.style.height = winHeight + "px";
     }
+
+    function computeAnchor () {
+      var scrollEl = $("hgroup")[0];
+      var anchorArray = $("a");
+      var chartArray = $("p");
+      for (let i = 0; i < anchorArray.length; i++) {
+        let height = Math.round($(chartArray[i]).position().top);
+        console.log(height);
+        $(anchorArray[i]).attr("value", height);
+      }
+    }
+    // 给window绑定方法  => 变化的开始
+    window.onresize = function () {
+      computeAnchor();
+      autoHeight();
+    }
     
-    window.onresize = autoHeight;
+    $("a").click(function (e) {
+      e.preventDefault();
+      // let height = $($(this).attr('href')).position().top;
+      // console.log(height);
+      $("hgroup").animate({
+        scrollTop: $(this).attr("value")
+        // scrollTop: height
+      }, {
+          duration: 500,
+          easing: "swing"
+      });
+    });
+
+    
+    // $("html,body").animate({
+    //   scrollTop:$("").offset().top
+    // }, 1000)
   });
 </script>
 
