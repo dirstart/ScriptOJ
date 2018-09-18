@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      margin-bottom: 10px;
+      width: 500px;
+      height: 300px;
+      background: #089e8a;
+    }
+
+    hgroup {
+      border: 10px solid #382832;
+      margin: 0 auto;
+      width: 600px;
+      height: 400px;
+      overflow: auto;
+    }
+    .nav {
+      position: fixed;
+      width: 60px;
+      bottom: 20px;
+      right: 30px;
+    }
+
+    .nav a {
+      margin-top: 2px;
+      display: block;
+      width: 58px;
+      height: 20px;
+      border-radius: 3px;
+      border: 1px solid #69c;
+      background: #6c9;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      color: #fff;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>工作中需求</h1>
+  <h1>放在结构中不能用 scrollTop 这个真的就难了十倍。</h1>
+  <h3>需求1：实现固定导航栏</h3>
+  <h3>需求2：resize后高度自适应，导航栏也要变。</h3>
+  <pre>
+    还可以记住的东西：
+      document.getElementById("xx").style.height => 只能获取到 style 属性属性属性中的。
+      css中的获取不到。
+      1.可以考虑用 offsetHeight
+      2.可以考虑用兼容性的 getComputedStyle 方法
+  </pre>
+  <hgroup>
+    <p id="test1">1</p>
+    <p id="test2">2</p>
+    <p id="test3">3</p>
+    <p id="test4">4</p>
+  </hgroup>
+  <div class="nav">
+    <a href="#test1">1</a>
+    <a href="#test2">2</a>
+    <a href="#test3">3</a>
+    <a href="#test4">4</a>
+  </div>
+</body>
+<script>
+  $(document).ready(function () {
+    $("a").click(function (e) {
+      e.preventDefault();
+      $("html, body").animate({
+        scrollTop: $($(this).attr("href")).offset().top + "px"
+      }, {
+          duration: 500,
+          easing: "swing"
+        });
+    })
+
+    $(".nav").click(function () {
+      $(this).css('overflow') === 'visible' ? $(this).css('overflow', 'hidden') : $(this).css('overflow', 'visible');
+    });
+
+    let winHeight = 0;
+    autoHeight();
+
+    function autoHeight() {
+      if (window.innerHeight) {
+        winHeight = window.innerHeight;
+      } else if ((document.body) && (document.body.clientHeight)) {
+        winHeight = document.body.clientHeight;
+      }
+      
+      let rate = winHeight / 600;
+      let arr = document.getElementsByTagName("p");
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].style.height = rate * 200 + "px";
+      }
+      document.body.style.height = winHeight + "px";
+    }
+    
+    window.onresize = autoHeight;
+  });
+</script>
+
+</html>

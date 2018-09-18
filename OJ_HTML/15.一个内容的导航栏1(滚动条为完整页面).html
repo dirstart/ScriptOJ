@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,36 +12,44 @@
       background: #089e8a;
       margin-bottom: 100px;
     }
+
     .nav {
       position: fixed;
-      /* width:  */
       width: 60px;
-      height: 22px;
-      overflow: hidden;
-      bottom: 200px;
-      right: 0;
+      bottom: 20px;
+      right: 30px;
     }
-    .nav:hover {
-      overflow: visible;
-    }
+
     .nav a {
+      margin-top: 2px;
       display: block;
-      width: 60px;
+      width: 58px;
       height: 20px;
-      border: 1px solid #6c9;
-      color: #000;
+      border-radius: 3px;
+      border: 1px solid #69c;
+      background: #6c9;
       text-align: center;
       text-decoration: none;
     }
+
     .nav a:hover {
-      background: #089e8a;
       color: #fff;
     }
   </style>
   <title>Document</title>
 </head>
+
 <body>
-  <h1>当内容过长，我们有时候就需要悬浮着的固定着的导航栏.</h1>
+  <h1>工作中需求</h1>
+  <h3>需求1：实现固定导航栏</h3>
+  <h3>需求2：resize后高度自适应，导航栏也要变。</h3>
+  <pre>
+    还可以记住的东西：
+      document.getElementById("xx").style.height => 只能获取到 style 属性属性属性中的。
+      css中的获取不到。
+      1.可以考虑用 offsetHeight
+      2.可以考虑用兼容性的 getComputedStyle 方法
+  </pre>
   <p id="test1">1</p>
   <p id="test2">2</p>
   <p id="test3">3</p>
@@ -59,14 +68,35 @@
       $("html, body").animate({
         scrollTop: $($(this).attr("href")).offset().top + "px"
       }, {
-        duration: 500,
-        easing: "swing"
-      });
+          duration: 500,
+          easing: "swing"
+        });
     })
 
     $(".nav").click(function () {
       $(this).css('overflow') === 'visible' ? $(this).css('overflow', 'hidden') : $(this).css('overflow', 'visible');
     });
+
+    let winHeight = 0;
+    autoHeight();
+
+    function autoHeight() {
+      if (window.innerHeight) {
+        winHeight = window.innerHeight;
+      } else if ((document.body) && (document.body.clientHeight)) {
+        winHeight = document.body.clientHeight;
+      }
+      
+      let rate = winHeight / 600;
+      let arr = document.getElementsByTagName("p");
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].style.height = rate * 300 + "px";
+      }
+      document.body.style.height = winHeight + "px";
+    }
+    
+    window.onresize = autoHeight;
   });
 </script>
+
 </html>
