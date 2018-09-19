@@ -106,27 +106,29 @@
 
     function computeAnchor () {
       var scrollEl = $("hgroup")[0];
+      var oldTop = Math.round(scrollEl.scrollTop);
       var anchorArray = $("a");
       var chartArray = $("p");
+      // 初始高度设置为 0
+      var height = 0;
+      var increase = 0;
       for (let i = 0; i < anchorArray.length; i++) {
-        let height = Math.round($(chartArray[i]).position().top);
-        console.log(height);
+        // let height = Math.round($(chartArray[i]).position().top + oldTop);
         $(anchorArray[i]).attr("value", height);
+        increase = $($(anchorArray[0]).attr("href")).outerHeight(true);
+        height += increase;
       }
     }
     // 给window绑定方法  => 变化的开始
     window.onresize = function () {
-      computeAnchor();
       autoHeight();
+      computeAnchor();
     }
     
     $("a").click(function (e) {
       e.preventDefault();
-      // let height = $($(this).attr('href')).position().top;
-      // console.log(height);
       $("hgroup").animate({
         scrollTop: $(this).attr("value")
-        // scrollTop: height
       }, {
           duration: 500,
           easing: "swing"
