@@ -14,7 +14,6 @@ console.log(a1 === a2); // true
 
 
 // 2.利用函数内部判断： 缺陷在于可以从外部改变 unique
-
 function B() {
     if (B.unique !== undefined) {
         return B.unique;
