@@ -58,4 +58,3 @@ const methodFour = (all, sub) => {
   return all.filter(item => !sub.includes(item));
 }
 methodFour(all, sub).show("four");
-
