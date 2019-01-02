@@ -1,0 +1,26 @@
+{
+  "name": "scriptoj",
+  "version": "1.0.0",
+  "description": "- A\r > 基础知识级别",
+  "main": "handleClass.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dirstart/ScriptOJ.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dirstart/ScriptOJ/issues"
+  },
+  "homepage": "https://github.com/dirstart/ScriptOJ#readme",
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.12.1"
+  }
+}

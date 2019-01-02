@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    使用 window.navigator.onLine 并不准确。
+    只能用来判断 机器是否连接了局域网或者路由器。
+    并不能确保是否连上了网。
+
+    正确的办法是通过 Ajax：比如 Ping 百度。
+  </div>
+</body>
+<script>
+window.onload = function () {
+  if (window.navigator.onLine) {
+    alert("在线");
+  } else {
+    alert("断线");
+  }
+};
+window.addEventListener("online", function () {
+  alert("突然在线了");
+});
+window.addEventListener("offline", function () {
+  alert("突然离线了");
+});
+</script>
+</html>
