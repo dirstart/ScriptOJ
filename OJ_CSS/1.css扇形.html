@@ -25,7 +25,12 @@
       height: 0;
       border-width: 100px;
       border-style: solid;
-      border-color: red blue green yellow;
+      border-color: blue yellow red green;
+      /* width: 0;
+      height: 0;
+      border-width: 100px;
+      border-style: solid;
+      border-color: red blue green yellow; */
     }
     li:nth-child(2) {
       width: 0;
@@ -87,4 +92,19 @@
     <li></li>
   </ul>
 </body>
+<script>
+var oLi = document.getElementsByTagName("ul")[0].getElementsByTagName("li");
+console.log(oLi);
+for (var i = 0; i < oLi.length; i++) {
+  // (function (num) {
+  //   oLi[i].onclick = function () {
+  //     console.log(num);
+  //   }
+  // })(i);
+  oLi[i].index = i;
+  oLi[i].onclick = function () {
+    console.log(this.index);
+  }
+}
+</script>
 </html>

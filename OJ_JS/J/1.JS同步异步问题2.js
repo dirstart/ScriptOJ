@@ -1,6 +1,6 @@
-const Promise = require('bluebird');
+// const Promise = require('bluebird');
 
-let a = new Promise((resolve, reject) => {
+const a = new Promise((resolve, reject) => {
   console.log(1);
   setTimeout(() => console.log(2), 0);
   console.log(3);
@@ -10,12 +10,16 @@ let a = new Promise((resolve, reject) => {
 
 a.then(v => console.log(5));
 
-let b = new Promise(() => {
+const b = new Promise(() => {
   console.log(6);
   setTimeout(() => console.log(7), 0);
 });
 
 console.log(8);
+
+
+// 1/3/4/6/8/2/7/5
+
 
 // 那么，最后的执行顺序是。
 // 我猜的第一次： 8 1 3 4 5 6 2 7

@@ -8,9 +8,55 @@
     margin: 0;
     padding: 0;
   }
+  #wrap {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #box {
+    width: 100px;
+    height:100px;
+    background: yellow;
+    display: flex;
+    justify-content: align;
+    align-items: align;
+  }
+  #box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* way1 */
+    /* transform: translate(-50%, -50%); */
+
+    /* way2 */
+    /* margin-left: -50px;
+    margin-top: -50px; */
+  }
+  #box2 {
+    width: 100px;
+    height: 100px;
+    background-color: antiquewhite;
+  }
+  #box3 {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: brown;
+  }
 </style>
 </head>
 <body>
-  <div id="box" style="background-color: blue;height:100vh;"></div>
+  <div id="wrap" style="background-color:#089e8a;height:100vh;">
+    <!-- <div id="box">123</div> -->
+    <div id="box2">88</div>
+    <div id="box3">33</div>
+  </div>
 </body>
 </html>
